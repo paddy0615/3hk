@@ -1,6 +1,6 @@
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`faqsDate208` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`3hk` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-USE `faqsDate208`;
+USE `3hk`;
 
 /*Table structure for table `faqs_category` */
 
@@ -145,7 +145,7 @@ CREATE TABLE `faqs_detailed_feedback` (
   PRIMARY KEY (`df_id`)
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
---------------- 2.2版
+-- 2.2版
 
 DROP TABLE IF EXISTS `faqs_no_tags`;
 CREATE TABLE `faqs_no_tags` (

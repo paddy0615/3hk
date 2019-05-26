@@ -3,10 +3,10 @@ server:
   port: 8080
   address: 0.0.0.0
   servlet:
-    context-path: /hkexpress
+    context-path: /3hk
 ##thymeleaf页面模板配置
 web:
-  upload-path: C:/faqsonic/faq
+  upload-path: C:/3hk/faq
 
 spring:
   # 多个springboot项目部署,需加
