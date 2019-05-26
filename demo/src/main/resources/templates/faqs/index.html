@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FAQS | HK Express</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/favicon-32x32.png}"/>
+    <link rel="stylesheet" th:href="@{/css/assets/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <script th:src="@{/js/assets/jquery.js}"></script>
+    <script th:src="@{/js/layer/layer.js}"></script>
+    <script th:src="@{/js/assets/angular.js}"></script>
+    <script th:src="@{/js/assets/angular-translate.min.js}"></script>
+    <script th:src="@{/js/assets/angular-translate-loader-static-files.min.js}"></script>
+    <script th:src="@{/js/index.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <base th:href="@{/appPage/index}">
+    <script th:inline="javascript">
+        var ctx = [[@{/}]];
+    </script>
+    <style>
+        #SnapABug_bImg{
+            width:100%;
+        }
+        .scrollToTop > img {
+            position: fixed;
+            z-index: 10;
+            bottom: 20px;
+            left: 30px;
+            cursor: pointer;
+        }
+        @media (min-width: 992px){
+            .col-md-8 {
+                width: 69.666667%;
+            }
+            .col-md-offset-2 {
+                margin-left: 15.2%;
+            }
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('.scrollToTop').fadeIn();
+                } else {
+                    $('.scrollToTop').fadeOut();
+                }
+            });
+
+            $('.scrollToTop').click(function () {
+                $('html, body').animate({ scrollTop: 0 }, 800);
+                return false;
+            });
+        });
+    </script>
+</head>
+<body ng-app="myapp" ng-controller="indexController">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-2 col-md-8 col-md-offset-2 main">
+
+            <div class="header">
+                <div class="header-loagin">
+                    <a href="javascript:void(0);" ng-click="clickCategory(0)"><img th:src="@{/img/faq_top3.png}"></a>
+                </div>
+                <div class="header-lan">
+                    <img th:src="@{/img/globe1.png}"/>
+                    <select ng-model="langId" ng-change="clickLanguage()" ng-options=" language.id  as language.title for language in result.languages">
+                    </select>
+                </div>
+            </div>
+
+            <div class="nav-select">
+                <div class="input-group">
+                    <input style="height: 40px;" ng-model="searchTest" id="search" type="text" placeholder="{{selectTest}}" class="form-control" ng-keyup="onKeyup(event)">
+                    <span class="input-group-addon"><a href="javascript:;" ng-click="getSearch()"><span class="glyphicon glyphicon-search"></span></a></span>
+                </div>
+            </div>
+            <div style="clear: both;margin-bottom: 12px;"></div>
+            <div ng-show="searchShow">
+                <div class="content-box" style="padding: 0px 12px;">
+                    <ul>
+                        <li style="border:none;color: #555;" ng-if="detaileds.length == 0" >{{selectTestUnll}}</li>
+                        <li ng-repeat="detailed in detaileds"><a th:href="@{/appJson/getIndexDetailed?dlId={{detailed.id}}}">{{detailed.title}}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-box" style="padding: 50px 12px;margin-top: -22px;">
+                <div class="list-group">
+                    <a href="javascript:;" class="list-group-item active" style="background-color: #71288E;border-color: #71288E;border-top-left-radius: 25px;">
+                        {{hotspotTest}}
+                    </a>
+                    <a ng-repeat="detailed in hotspots" class="list-group-item" th:href="@{/appJson/getIndexDetailed?dlId={{detailed.id}}}">{{detailed.title}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="scrollToTop" style="display: none;">
+    <img th:src="@{/img/scroll-to-top.png}" alt="Back To Top">
+</div>
+</body>
+</html>

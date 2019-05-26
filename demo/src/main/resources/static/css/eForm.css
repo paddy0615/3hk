@@ -1,0 +1,174 @@
+body{
+    /* background: url(/img/22.jpg) no-repeat;*/
+    background-size: 100%;
+}
+.content{
+    width: 960px;
+    margin: 0 auto;
+}
+.header{
+    margin-top: 10px;
+    height: 55px;
+}
+.header-loagin{
+    float: left;
+}
+.header-lan{
+    float: right;
+    line-height: 50px;
+    color: #501275;
+}
+#SnapABug_bImg{
+    width:100%;
+}
+.scrollToTop > img {
+    position: fixed;
+    z-index: 10;
+    bottom: 20px;
+    left: 30px;
+    cursor: pointer;
+}
+@media (min-width: 992px){
+    .eForm-div1 {
+        width: 85%;
+        margin: auto;
+    }
+    .eForm-div1 .confirmation-test{
+        margin: auto;
+        text-align: center;
+    }
+    .eForm-div1 .file4-text{
+        width: 60%;
+    }
+    #jmeter .form-group{
+        float: left;
+    }
+    #jmeter .jmeterDiv1,.jmeterDiv2,.jmeterDiv3,.jmeterDiv4,.jmeterDiv5,.jmeterDiv6{
+        width: 30%;
+    }
+    #jmeter .jmeterDiv2,.jmeterDiv5{
+        margin: 0px 30px;
+    }
+
+}
+@media (max-width: 768px) {
+    .eForm-div1 {
+        width: 95%;
+        margin: auto;
+    }
+    .eForm-div1 .confirmation-test{
+        width: 85%;
+        margin: auto;
+        text-align: center;
+    }
+    .eForm-div1 .file4-text{
+        width: 60%;
+    }
+    #jmeter .form-group{
+        float: left;
+    }
+    #jmeter .jmeterDiv1,.jmeterDiv2,.jmeterDiv3,.jmeterDiv4,.jmeterDiv5,.jmeterDiv6{
+        width: 48%;
+    }
+    #jmeter .jmeterDiv2,.jmeterDiv5{
+        margin-left: 10px;
+    }
+    #jmeter .jmeterDiv5-div{
+        clear: both;
+    }
+
+}
+
+
+/*progressbar*/
+#progressbar{
+    padding: 0 0 0 10px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    /*CSS counters to number the steps*/
+    counter-reset:step;
+}
+#progressbar li{
+    font-weight: bold;
+    font-family: Tahoma, Geneva, sans-serif;
+    text-align: center;
+    list-style-type: none;
+    color: #a639a5;
+    /*text-transform: uppercase;*/
+    font-size: 12px;
+    /*width: 33.33%;*/
+    /*width: 25%;*/
+    /*width: 16.66%;*/
+    width: 50%;
+    float: left;
+    position: relative;
+}
+/*numbers on top*/
+#progressbar li:before{
+    content: counter(step);
+    counter-increment: step;
+    width: 30px;
+    line-height: 30px;
+    display: block;
+    font-size: 10px;
+    color: white;
+    background: #4f0b7b;
+    border-radius: 3px;
+    margin: 0 auto 5px auto;
+}
+#progressbar .progressbarLi:before{
+    border: 1px solid #4f0b7b;
+    color: #4f0b7b;
+    background: white;
+}
+
+/*connectors*/
+#progressbar li:after{
+    content: '';
+    width:100%;
+    height: 5px;
+    background: #4f0b7b;
+    position: absolute;
+    left: -50%;
+    top: 12px;
+    z-index: -1;/* put it behind the numbers*/
+}
+#progressbar li:first-child:after{
+    /*connector not needed before the first step*/
+    content:none;
+}
+/*marking active/completed steps green*/
+/*the number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+    background: #623a96;
+    color: #fff;
+}
+
+
+.eForm-div1{
+    border: 1px solid;
+}
+.eForm-div1 input[type = "text"],.eForm-div1 select{
+    height: 50px;
+}
+.eForm-div1 ul{
+    border-bottom: 3px solid #71288E;
+}
+.eForm-div1 ul li a{
+    text-align: center;
+    background-color: #999;
+    color: white !important;
+    padding: 15px 10px;
+    width: 100px;
+}
+.eForm-div1 ul li a:hover{
+    background-color: #71288E !important;
+}
+.eForm-div1 ul li.active a{
+    background-color: #71288E !important;
+}
+
+.has-feedback label~.form-control-feedback{
+    top: 32px !important;
+    right: 12px !important;
+}

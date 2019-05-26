@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>FAQS | HK Express</title>
+        <link rel="icon" type="image/x-icon" th:href="@{/img/favicon-32x32.png}"/>
+        <link th:href="@{/css/assets/bootstrap.min.css}" rel="stylesheet">
+        <link th:href="@{/css/assets/ie10-viewport-bug-workaround.css}" rel="stylesheet">
+        <link th:href="@{/css/assets/dashboard.css}" rel="stylesheet">
+        <script th:src="@{/js/assets/jquery.js}"></script>
+        <script th:src="@{/js/assets/jqPaginator.min.js}"></script>
+        <link th:href="@{/css/assets/myPage.css}" rel="stylesheet">
+        <script th:src="@{/js/layer/layer.js}"></script>
+        <script th:src="@{/js/laydate/laydate.js}"></script>
+        <script th:src="@{/js/assets/angular.js}"></script>
+        <script th:src="@{/js/admin/directive.js}"></script>
+        <script th:src="@{/js/admin/feedback.js}"></script>
+        <script th:src="@{/js/common.js}"></script>
+        <script th:inline="javascript">
+            var ctx = [[@{/}]];
+        </script>
+
+        <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+        <!--[if lt IE 9]><script th:src="@{/js/assets/ie8-responsive-file-warning.js}"></script><![endif]-->
+        <script th:src="@{/js/assets/ie-emulation-modes-warning.js}"></script>
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+      </head>
+<body cz-shortcut-listen="true" ng-app="myapp" ng-controller="feedbackController">
+    <top-Directive></top-Directive>
+
+    <div class="container-fluid">
+      <div class="row">
+        <left-Directive></left-Directive>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <div class="row" style="padding-bottom: 9px;margin-bottom: 20px;border-bottom: 1px solid #eee;">
+              <div class="col-lg-5">
+                  <span style="font-size: 36px;">FAQ Feedback</span>
+              </div>
+          </div>
+          <div class="row" style="padding-left: 18px;color: red;padding-bottom: 20px;">
+            * Each IP address can rate good for each question is maximum 5 times for each day and can also rate bad for each question is also maximum times for each day
+          </div>
+        <div class="row">
+            <!-- language select -->
+            <label style="margin-top: 5px;margin-left: 50px;float: left;">Language: </label>
+            <div class="col-md-2">
+                <select ng-model="langId" class="form-control" ng-change="clickLanguage()"
+                        ng-options="language.id  as language.title for language in languages">
+                </select>
+            </div>
+
+            <!-- comment select -->
+            <label style="margin-top: 5px;margin-left: 50px;float: left;">Comment: </label>
+            <div class="col-md-2">
+                <select ng-model="comment" class="form-control" ng-change="clickLanguage()"
+                        ng-options="c.id  as c.name for c in comments">
+                </select>
+            </div>
+            <!-- comment Status -->
+            <label style="margin-top: 5px;margin-left: 50px;float: left;">Comment Status: </label>
+            <div class="col-md-2">
+                <select ng-model="commentStatu" class="form-control" ng-change="clickLanguage()"
+                        ng-options="c.id  as c.name for c in commentsStatus">
+                </select>
+            </div>
+
+        </div>
+
+          <div class="row" style="margin-top: 20px">
+              <!-- Rating select -->
+            <label style="margin-top: 5px;margin-left:50px;float: left;">Rating: </label>
+            <div class="col-md-2">
+              <select ng-model="df_type" class="form-control" ng-change="clickLanguage()"
+                      ng-options="d.id as d.name for d in df_types">
+              </select>
+            </div>
+            <!-- start time -->
+            <label style="margin-top: 5px;margin-left:50px;float: left;">start time: </label>
+            <div class="col-md-2">
+                <input type="text" class="form-control layui-input" id="ladate1" placeholder="yyyy-MM-dd">
+            </div>
+            <!-- end time -->
+            <label style="margin-top: 5px;margin-left:50px;float: left;">end time: </label>
+            <div class="col-md-2">
+                  <input type="text" class="form-control layui-input" id="ladate2" placeholder="yyyy-MM-dd">
+            </div>
+            <!-- Search -->
+            <div class="col-md-2">
+                <button class="btn btn-default" type="button" ng-click="getLayDate()">Search</button>
+            </div>
+
+          </div><!-- /.row -->
+
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Title</th>
+                  <th>Create Date</th>
+                  <th>IP</th>
+                  <th>Rating</th>
+                  <th>Comment Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="f in feedbacks">
+                  <td>{{f.id}}</td>
+                  <td class="col-md-4">{{f.dlTitle}}</td>
+                  <td>{{f.createDate.substring(0,16)}}</td>
+                  <td>{{f.ip}}</td>
+                  <td>
+                     <element ng-if="f.dfType == 1">+1</element>
+                     <element ng-if="f.dfType == 2">-1</element>
+                  </td>
+                  <td>
+                      <div ng-if="f.dfType == 2 && f.content != '' && f.contentStatus == 0" style="color:red;">Open</div>
+                      <div ng-if="f.dfType == 2 && f.content != '' && f.contentStatus == 1">Close</div>
+                  </td>
+                  <td style="text-align: right;">
+                      <button class="btn btn-default" type="button"  ng-if="f.content != ''" ng-click="getSet(f.id)" >Select</button>
+                      <element ng-if="f.dfType == 2 && f.content != ''">
+                          <button class="btn btn-default" type="button"  ng-if="f.contentStatus == 0" ng-click="updateFeedbackStatus(f.id,1)" >Close</button>
+                          <button class="btn btn-default" type="button"  ng-if="f.contentStatus == 1" ng-click="updateFeedbackStatus(f.id,0)" >Open</button>
+                      </element>
+
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+          <!-- 分页-->
+          <div style="text-align: right;">
+            <ul class="pagination" id="pagination"></ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <script th:src="@{/js/assets/bootstrap.min.js}"></script>
+    <script th:src="@{/js/assets/holder.min.js}"></script>
+    <script th:src="@{/js/assets/ie10-viewport-bug-workaround.js}"></script>
+
+</body>
+</html>

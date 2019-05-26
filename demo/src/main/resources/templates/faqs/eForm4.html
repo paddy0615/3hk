@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FAQS | HK Express</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/favicon-32x32.png}"/>
+    <link rel="stylesheet" th:href="@{/css/assets/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/eForm.css}">
+    <script th:inline="javascript">
+        var ctx = [[@{/}]];
+    </script>
+    <script th:src="@{/js/assets/jquery.js}"></script>
+    <script th:src="@{/js/assets/bootstrap.js}"></script>
+    <script th:src="@{/js/layer/layer.js}"></script>
+    <script th:src="@{/js/laydate/laydate.js}"></script>
+    <script th:src="@{/js/assets/angular.js}"></script>
+    <script th:src="@{/js/assets/angular-translate.min.js}"></script>
+    <script th:src="@{/js/assets/angular-translate-loader-static-files.min.js}"></script>
+    <script th:src="@{/js/eForm.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <base th:href="@{/appPage/index}">
+
+    <script>
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('.scrollToTop').fadeIn();
+                } else {
+                    $('.scrollToTop').fadeOut();
+                }
+            });
+
+            $('.scrollToTop').click(function () {
+                $('html, body').animate({ scrollTop: 0 }, 800);
+                return false;
+            });
+        });
+
+    </script>
+
+</head>
+<body ng-app="myapp" ng-controller="eForm4Controller">
+<div class="container-fluid" id="eForm1">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-2 col-md-8 col-md-offset-2 main">
+
+            <div class="header">
+                <div class="header-loagin">
+                    <a href="javascript:void(0);" ng-click="clickCategory(0)"><img th:src="@{/img/faq_top3.png}"></a>
+                </div>
+                <div class="header-lan">
+                    <img th:src="@{/img/globe1.png}"/>
+                    <select ng-model="langId" ng-change="clickLanguage()" ng-options=" language.id  as language.title for language in languages">
+                    </select>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 50px;">
+                <div class="col-md-6 col-md-offset-3">
+                    <ul id="progressbar">
+                        <li id="progressbarLi1">{{'lab1'|translate}}</li>
+                        <li id="progressbarLi2">{{'lab22'|translate}}</li>
+                    </ul>
+                </div>
+
+                <div style="width: 100%;float: left;margin-bottom: 100px;">
+
+                    <!-- eFormContent-->
+                    <div ng-show="eFormContent" class="eForm-div1" style="border-radius: 10px;color: #9960a7;">
+                        <p class="list-group-item active ng-binding" style="background-color: #71288E;border-color: #71288E;border-top-left-radius: 10px;border-top-right-radius: 10px;font-size: 24px;">
+                            {{'lab56'|translate}}
+                        </p>
+                        <div style="padding: 10px;">
+                            <p style="margin: 5px 0px;"></p>
+                            <div class="form-group">
+                                <label>{{'lab16'|translate}}:</label>
+                                <input type="text" name="PNRtext" class="form-control"  placeholder="">
+                            </div>
+                            <div class="form-group" style="width: 50%;float: left;">
+                                <label>{{'lab36'|translate}}:</label>
+                                <input type="text" class="form-control" placeholder="{{'lab3'|translate}}">
+                            </div>
+                            <div class="form-group"  style="width: 48%;float: right;">
+                                <label style="color: white">1</label>
+                                <input type="text" class="form-control" placeholder="{{'lab4'|translate}}">
+                            </div>
+                            <div class="form-group" style="width: 50%;float: left;">
+                                <label>{{'lab37'|translate}}:</label>
+                                <input type="text" class="form-control" placeholder="{{'lab3'|translate}}">
+                            </div>
+                            <div class="form-group"  style="width: 48%;float: right;">
+                                <label style="color: white">1</label>
+                                <input type="text" class="form-control" placeholder="{{'lab4'|translate}}">
+                            </div>
+                            <div style="clear: both;"></div>
+                            <div class="form-group">
+                                <label>{{'lab38'|translate}}:</label>
+                            </div>
+                            <div class="form-group" style="margin-top: -15px;">
+                                <!--美化Input tpye="file", 文件上传标签 -->
+                                <input type="button" onclick="path.click()" class="btn btn-default ng-binding" style="color: white;padding: 10px 30px;background-color: #71288E;" value="{{'lab39'|translate}}">
+                                <input type="text" class="form-control file4-text" style="display:inline;"  size="20" name="upfile" id="upfile"  readonly>
+                                <input type="file" id="path" style="display:none" onchange="upfile.value=this.value">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>{{'lab12'|translate}}:</label>
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label>{{'lab13'|translate}}</label>
+                            </div>
+                            <button class="btn btn-default" type="submit" style="float: right;background-color: #71288E;color: white;padding: 10px 30px;" ng-click="eFormContentSubmit()">{{'lab14'|translate}}</button>
+                            <div style="clear: both;"></div>
+                        </div>
+
+                    </div>
+
+                    <!-- error-->
+                    <div ng-show="eFormError" class="eForm-div1" style="border-radius: 10px;color: #9960a7;">
+                        <p class="list-group-item active ng-binding" style="background-color: #71288E;border-color: #71288E;border-top-left-radius: 10px;border-top-right-radius: 10px;font-size: 24px;">
+                            {{'lab19'|translate}}
+                        </p>
+                        <div style="padding: 10px;">
+                            {{'lab20'|translate}}
+                            <div style="clear: both;"></div>
+                            <button class="btn btn-default" type="submit" style="float: left;background-color: #71288E;color: white;padding: 10px 30px;margin-top: 80px;" ng-click="getEformContent()">{{'lab21'|translate}}</button>
+                            <div style="clear: both;"></div>
+                        </div>
+
+                    </div>
+
+                    <!-- success-->
+                    <div ng-show="eFormSuccess" class="eForm-div1" style="border-radius: 10px;color: #9960a7;">
+                        <p class="list-group-item active ng-binding" style="background-color: #71288E;border-color: #71288E;border-top-left-radius: 10px;border-top-right-radius: 10px;font-size: 24px;">
+                            {{'lab22'|translate}}
+                        </p>
+                        <div style="padding: 10px;">
+                            <div class="form-group confirmation-test">
+                                <div>{{'lab23'|translate}}
+                                </div>
+                                <div style="margin: 20px 0px;">{{'lab24'|translate}}</div>
+                                <p class="list-group-item active ng-binding" style="background-color: #71288E;border-color: #71288E;font-size: 24px;width: 250px;margin: auto;font-weight: bold;">
+                                    E-IN-0000000001
+                                </p>
+                            </div>
+
+                            <div style="clear: both;"></div>
+                            <button class="btn btn-default" type="submit" style="float: right;background-color: #71288E;color: white;padding: 10px 30px;margin-top: 80px;"  ng-click="getEformContent()">{{'lab25'|translate}}</button>
+                            <div style="clear: both;"></div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="scrollToTop" style="display: none;">
+    <img th:src="@{/img/scroll-to-top.png}" alt="Back To Top">
+</div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>FAQS | HK Express</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/favicon-32x32.png}"/>
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script th:src="@{/js/assets/ie8-responsive-file-warning.js}"></script><![endif]-->
+    <script th:src="@{/js/assets/ie-emulation-modes-warning.js}"></script>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/assets/bootstrap.min.css}" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link th:href="@{/css/assets/ie10-viewport-bug-workaround.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/assets/singin.css}" rel="stylesheet">
+    <script th:src="@{/js/assets/jquery.js}"></script>
+    <script th:src="@{/js/layer/layer.js}"></script>
+    <script th:src="@{/js/assets/angular.js}"></script>
+    <script th:src="@{/js/login.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:inline="javascript">
+        var ctx = [[@{/}]];
+    </script>
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script th:src="@{/js/assets/ie8-responsive-file-warning.js}"></script><![endif]-->
+    <script th:src="@{/js/assets/ie-emulation-modes-warning.js}"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body ng-app="myapp" ng-controller="loginController">
+
+<div class="container">
+
+    <form id="loginFormInfo" class="form-signin" ng-submit="loginAction();">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputLoginId" class="sr-only">Email address</label>
+        <input type="text" id="inputLoginId" name="loginId" ng-model="user.loginId" class="form-control" placeholder="Login ID" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" ng-model="user.password" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="loginFormInfo.$invalid">Sign in</button>
+    </form>
+
+</div> <!-- /container -->
+
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script  th:src="@{/js/assets/ie10-viewport-bug-workaround.js}"></script>
+</body>
+</html>

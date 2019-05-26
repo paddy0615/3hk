@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>FAQS | HK Express</title>
+        <link rel="icon" type="image/x-icon" th:href="@{/img/favicon-32x32.png}"/>
+        <link th:href="@{/css/assets/bootstrap.min.css}" rel="stylesheet">
+        <link th:href="@{/css/assets/ie10-viewport-bug-workaround.css}" rel="stylesheet">
+        <link th:href="@{/css/assets/dashboard.css}" rel="stylesheet">
+        <script th:src="@{/js/assets/jquery.js}"></script>
+        <script th:src="@{/js/layer/layer.js}"></script>
+        <script th:src="@{/js/assets/angular.js}"></script>
+        <script th:src="@{/js/admin/directive.js}"></script>
+        <script th:src="@{/js/admin/index.js}"></script>
+        <script th:src="@{/js/common.js}"></script>
+        <script th:inline="javascript">
+            var ctx = [[@{/}]];
+        </script>
+
+        <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+        <!--[if lt IE 9]><script th:src="@{/js/assets/ie8-responsive-file-warning.js}"></script><![endif]-->
+        <script th:src="@{/js/assets/ie-emulation-modes-warning.js}"></script>
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+      </head>
+<body cz-shortcut-listen="true" ng-app="myapp" ng-controller="categoryEditController">
+    <top-Directive></top-Directive>
+
+    <div class="container-fluid">
+      <div class="row">
+          <left-Directive></left-Directive>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Category<span style="font-size: 28px;color: #999;">{{editType}}</span></h1>
+            <!-- add -->
+          <div class="row" ng-show="addType">
+              <form class="form-horizontal" ng-submit="submitAdd()">
+                  <div class="form-group">
+                      <label class="col-sm-2 control-label">Language :</label>
+                      <div class="col-md-2">
+                          <select ng-model="langId" class="form-control"
+                                  ng-options="language.id as language.title for language in languages">
+                          </select>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="inputTitle" class="col-sm-2 control-label">Title :</label>
+                      <div class="col-sm-3">
+                          <input type="text" class="form-control" id="inputTitle" ng-model="categorie.title">
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="col-sm-offset-2 col-sm-10">
+                          <button style="width: 70px;" type="submit" class="btn btn-default">Ok</button>
+                          <button style="width: 70px;"  ng-click="goCancel('/hkexpress/admin/category?selLangId='+selLangId)" type="button" class="btn btn-default">Cancel</button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+
+            <!-- update -->
+        <div class="row" ng-show="!addType">
+            <form class="form-horizontal" ng-submit="submitUpdate()">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Language :</label>
+                    <label style="text-indent: 2em;font-weight: normal;" class="control-label">{{language.title}}</label>
+                </div>
+                <div class="form-group">
+                    <label for="inputTitle" class="col-sm-2 control-label">Title :</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="inputTitle" ng-model="categorie.title">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button style="width: 70px;" type="submit" class="btn btn-default">Ok</button>
+                        <button style="width: 70px;" ng-click="goCancel('category?selLangId='+selLangId)" type="button" class="btn btn-default">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script  th:src="@{/js/assets/vendor/jquery.min.js}"><\/script>')</script>
+    <script th:src="@{/js/assets/bootstrap.min.js}"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script th:src="@{/js/assets/holder.min.js}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script th:src="@{/js/assets/ie10-viewport-bug-workaround.js}"></script>
+  
+</body>
+</html>

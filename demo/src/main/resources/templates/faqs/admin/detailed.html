@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>FAQS | HK Express</title>
+  <link rel="icon" type="image/x-icon" th:href="@{/img/favicon-32x32.png}"/>
+  <!-- Bootstrap core CSS -->
+  <link th:href="@{/css/assets/bootstrap.min.css}" rel="stylesheet">
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <link th:href="@{/css/assets/ie10-viewport-bug-workaround.css}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link th:href="@{/css/assets/dashboard.css}" rel="stylesheet">
+  <script th:src="@{/js/assets/jquery.js}"></script>
+  <script th:src="@{/js/layer/layer.js}"></script>
+  <script th:src="@{/js/assets/angular.js}"></script>
+  <script th:src="@{/js/admin/directive.js}"></script>
+  <script th:src="@{/js/admin/detailed.js}"></script>
+  <script th:src="@{/js/common.js}"></script>
+  <script th:inline="javascript">
+      var ctx = [[@{/}]];
+  </script>
+
+  <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+  <!--[if lt IE 9]><script th:src="@{/js/assets/ie8-responsive-file-warning.js}"></script><![endif]-->
+  <script th:src="@{/js/assets/ie-emulation-modes-warning.js}"></script>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body cz-shortcut-listen="true" ng-app="myapp" ng-controller="detailedController">
+<top-Directive></top-Directive>
+
+<div class="container-fluid">
+  <div class="row">
+    <left-Directive></left-Directive>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <div class="row" style="padding-bottom: 9px;margin-bottom: 20px;border-bottom: 1px solid #eee;">
+        <div class="col-lg-2">
+          <span style="font-size: 36px;">FAQ</span>
+        </div>
+        <div class="col-lg-10" style="float: right;top: 20px;">
+          <div class="input-group">
+            <input ng-model="searchTest" type="text" class="form-control" placeholder="{{selectTest}}"  ng-keyup="onKeyup(event)">
+            <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" ng-click="getSearchTitle()"><i class="glyphicon glyphicon-search"></i></button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- language select -->
+        <label style="margin-top: 5px;margin-left: 50px;float: left;">Language: </label>
+        <div class="col-md-2">
+          <select ng-model="langId" class="form-control" ng-change="clickLanguage()"
+                  ng-options="language.id  as language.title for language in languages">
+          </select>
+        </div>
+
+        <!-- category select -->
+        <label style="margin-top: 5px;margin-left: 30px;float: left;">Category: </label>
+        <div class="col-md-2">
+          <select ng-model="catId" class="form-control" ng-change="clickCategory()"
+                  ng-options="categorie.id  as categorie.title for categorie in categories">
+          </select>
+        </div>
+
+        <!-- button -->
+        <div class="col-lg-5" style="float: right;text-align: right;">
+          <button class="btn btn-default" type="button" ng-click="getEdit(0)">Add</button>
+          <button class="btn btn-default" type="button" ng-click="getDelete(0)">Delete Selected</button>
+          <button class="btn btn-default" type="button" ng-click="editStatus(0,1)">Show Selected</button>
+          <button class="btn btn-default" type="button" ng-click="editStatus(0,0,1)">Hide Selected</button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th><input type="checkbox" name="checkboxAll" ng-click="updateSelectionAll($event)"></th>
+            <th>Title</th>
+            <th>Update Date</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="detailed in detaileds">
+            <td> <input style="vertical-align:top;"  type="checkbox" name="checkboxClien" ng-click="updateSelection($event,detailed.id)" value="{{detailed.id}}">{{$index+1}}</td>
+            <td class="col-md-6">{{detailed.title}}</td>
+            <td>{{detailed.updateDate.substring(0,16)}}</td>
+            <td ng-if="detailed.status == 1">Show</td>
+            <td ng-if="detailed.status == 0">Hide</td>
+            <td style="text-align: right;">
+              <!--<button class="btn btn-default" type="button" ng-show="!searchType" ng-click="editTop(detailed.id)" >Top</button>&lt;!&ndash;置顶&ndash;&gt;-->
+              <button class="btn btn-default" type="button" ng-if="detailed.status == 1" ng-click="editStatus(detailed.id,0)">Hide</button><!--已发表-->
+              <button class="btn btn-default" type="button" ng-if="detailed.status == 0" ng-click="editStatus(detailed.id,1)">Show</button><!--未发表-->
+              <button class="btn btn-default" type="button" ng-click="getEdit(detailed.id)" >Edit</button>
+              <button class="btn btn-default" type="button" ng-click="getDelete(detailed.id)">Delete</button>
+            </td>
+          </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script  th:src="@{/js/assets/vendor/jquery.min.js}"><\/script>')</script>
+<script th:src="@{/js/assets/bootstrap.min.js}"></script>
+<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+<script th:src="@{/js/assets/holder.min.js}"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script th:src="@{/js/assets/ie10-viewport-bug-workaround.js}"></script>
+
+</body>
+</html>

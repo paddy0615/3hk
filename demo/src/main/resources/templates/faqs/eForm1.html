@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FAQS | HK Express</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/favicon-32x32.png}"/>
+    <link rel="stylesheet" th:href="@{/css/assets/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/assets/bootstrapValidator.min.css}">
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/eForm.css}">
+    <script th:inline="javascript">
+        var ctx = [[@{/}]];
+    </script>
+    <script th:src="@{/js/assets/jquery.js}"></script>
+    <script th:src="@{/js/assets/bootstrap.js}"></script>
+    <script th:src="@{/js/layer/layer.js}"></script>
+    <script th:src="@{/js/laydate/laydate.js}"></script>
+    <script th:src="@{/js/assets/angular.js}"></script>
+    <script th:src="@{/js/assets/angular-translate.min.js}"></script>
+    <script th:src="@{/js/assets/angular-translate-loader-static-files.min.js}"></script>
+    <script th:src="@{/js/assets/bootstrapValidator.min.js}"></script>
+    <script th:src="@{/js/eForm.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <base th:href="@{/appPage/index}">
+
+    <script>
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('.scrollToTop').fadeIn();
+                } else {
+                    $('.scrollToTop').fadeOut();
+                }
+            });
+
+            $('.scrollToTop').click(function () {
+                $('html, body').animate({ scrollTop: 0 }, 800);
+                return false;
+            });
+        });
+
+    </script>
+
+</head>
+<body ng-app="myapp" ng-controller="eForm1Controller">
+<div class="container-fluid" id="eForm1">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-2 col-md-8 col-md-offset-2 main">
+
+            <div class="header">
+                <div class="header-loagin">
+                    <a href="javascript:void(0);" ng-click="clickCategory(0)"><img th:src="@{/img/faq_top3.png}"></a>
+                </div>
+                <div class="header-lan">
+                    <img th:src="@{/img/globe1.png}"/>
+                    <select ng-model="langId" ng-change="clickLanguage()" ng-options=" language.id  as language.title for language in languages">
+                    </select>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 50px;">
+                <div class="col-md-6 col-md-offset-3">
+                    <ul id="progressbar">
+                        <li id="progressbarLi1">{{'lab1'|translate}}</li>
+                        <li id="progressbarLi2">{{'lab22'|translate}}</li>
+                    </ul>
+                </div>
+
+                <div style="width: 100%;float: left;margin-bottom: 100px;">
+
+                    <!-- Resend Itinerary-->
+                    <div ng-show="eFormContent" class="eForm-div1" style="border-radius: 10px;color: #9960a7;">
+                        <p class="list-group-item active ng-binding" style="background-color: #71288E;border-color: #71288E;border-top-left-radius: 10px;border-top-right-radius: 10px;font-size: 24px;">
+                            {{'lab53'|translate}}
+                        </p>
+                        <div style="padding: 10px;">
+                            <p style="margin: 5px 0px;"></p>
+                            <div class="form-group">
+                                <label>
+                                    <span style="margin-right: 20px;">{{'lab16'|translate}}</span>
+                                    <input type="radio" name="a" ng-value="true" ng-model="PNR" ng-click="checkPNR()" ng-checked="true" >{{'lab17'|translate}}
+                                    <input type="radio" name="a" ng-value="false" ng-model="PNR" ng-click="checkPNR()" style="margin-left: 20px;">{{'lab18'|translate}}
+                                </label>
+                            </div>
+                            <div class="form-group pnr-div" style="margin-top: -30px;">
+                                <label></label>
+                                <input type="text" ng-model="e.pnr" name="pnr" class="form-control"  placeholder="{{'lab16'|translate}}" />
+                            </div>
+                            <div class="form-group" style="width: 50%;float: left;">
+                                <label>{{'lab2'|translate}}:</label>
+                                <input type="text" class="form-control" placeholder="{{'lab3'|translate}}" name="firstName" ng-model="e.firstname"/>
+                            </div>
+                            <div class="form-group"  style="width: 48%;float: right;">
+                                <label style="color: white">1</label>
+                                <input type="text" class="form-control" placeholder="{{'lab4'|translate}}"  name="lastName" ng-model="e.lastname"/>
+                            </div>
+                            <div style="clear: both;"></div>
+                            <!-- tab-->
+                            <div ng-show="myTabContent" class="tab-content">
+                                <ul class="nav nav-tabs" style="margin-bottom: 10px;">
+                                    <li data="1" class="active"><a href="#home" data-toggle="tab">{{'lab5'|translate}}</a></li>
+                                    <li data="2"><a href="#ios" data-toggle="tab">{{'lab6'|translate}}</a></li>
+                                    <li data="3"><a href="#jmeter" data-toggle="tab">{{'lab7'|translate}}</a></li>
+                                </ul>
+                                <!-- tab1-->
+                                <div class="tab-pane fade in active" id="home">
+                                    <div class="form-group" style="width: 50%;float: left;">
+                                        <label>{{'lab8'|translate}}:</label>
+                                        <select name="tab1_departing" ng-model="tab1_departing" class="form-control" ng-options="a.key as langId==1?a.hk:(langId==2?a.cn:a.en) group by langId==1?a.thk:(langId==2?a.tcn:a.ten) for a in e_area_names">
+                                        </select>
+                                    </div>
+                                    <div class="form-group"  style="width: 48%;float: right;">
+                                        <label>{{'lab9'|translate}}：</label>
+                                        <select name="tab1_going" ng-model="tab1_going" class="form-control" ng-options="a.key as langId==1?a.hk:(langId==2?a.cn:a.en) group by langId==1?a.thk:(langId==2?a.tcn:a.ten) for a in e_area_names">
+                                        </select>
+                                    </div>
+                                    <div style="clear: both;"></div>
+                                    <div class="form-group" style="width: 50%;float: left;">
+                                        <label>{{'lab10'|translate}}：</label>
+                                        <input name="ladate1" type="text" class="form-control layui-input col-sm-4" id="ladate1" />
+                                    </div>
+                                    <div class="form-group" style="width: 48%;float: right;">
+                                        <label>{{'lab11'|translate}}:</label>
+                                        <input name="ladate2" type="text" class="form-control layui-input col-sm-4" id="ladate2" />
+                                    </div>
+
+                                </div>
+
+                                <!-- tab2-->
+                                <div class="tab-pane fade" id="ios">
+                                    <div class="form-group" style="width: 50%;float: left;">
+                                        <label>{{'lab8'|translate}}:</label>
+                                        <select name="tab2_departing" ng-model="tab2_departing" class="form-control" ng-options="a.key as langId==1?a.hk:(langId==2?a.cn:a.en) group by langId==1?a.thk:(langId==2?a.tcn:a.ten) for a in e_area_names">
+                                        </select>
+                                    </div>
+                                    <div class="form-group"  style="width: 48%;float: right;">
+                                        <label>{{'lab9'|translate}}：</label>
+                                        <select name="tab2_going" ng-model="tab2_going" class="form-control" ng-options="a.key as langId==1?a.hk:(langId==2?a.cn:a.en) group by langId==1?a.thk:(langId==2?a.tcn:a.ten)  for a in e_area_names">
+                                        </select>
+                                    </div>
+                                    <div style="clear: both;"></div>
+                                    <div class="form-group" style="width: 50%;">
+                                        <label>{{'lab10'|translate}}：</label>
+                                        <input name="ladate3" type="text" class="form-control layui-input col-sm-4" id="ladate3">
+                                    </div>
+
+
+                                </div>
+
+                                <!-- tab3-->
+                                <div class="tab-pane fade" id="jmeter">
+                                    <div class="form-group jmeterDiv1">
+                                        <label>{{'lab8'|translate}}:</label>
+                                        <input style="background-color: white" readonly="readonly" type="text" class="form-control layui-input col-sm-4" ng-value="langId==1?e_area_names[0].hk:(langId==2?e_area_names[0].cn:e_area_names[0].en)">
+                                    </div>
+                                    <div class="form-group jmeterDiv2">
+                                        <label>{{'lab9'|translate}}：</label>
+                                        <select name="tab3_going" ng-model="tab3_going" class="form-control" ng-options="a.key as langId==1?a.hk:(langId==2?a.cn:a.en) group by langId==1?a.thk:(langId==2?a.tcn:a.ten)  for a in e_area_names">
+                                        </select>
+                                    </div>
+                                    <div class="form-group jmeterDiv3">
+                                        <label>{{'lab10'|translate}}：</label>
+                                        <input name="ladate4" type="text" class="form-control layui-input col-sm-4" id="ladate4"/>
+                                    </div>
+                                    <div style="clear: both;"></div>
+                                    <div class="form-group jmeterDiv4">
+                                        <label>{{'lab8'|translate}}:</label>
+                                        <select name="tab3_departingnew" ng-model="tab3_departingnew" class="form-control" ng-options="a.key as langId==1?a.hk:(langId==2?a.cn:a.en) group by langId==1?a.thk:(langId==2?a.tcn:a.ten)  for a in e_area_names">
+                                        </select>
+                                    </div>
+                                    <div class="form-group jmeterDiv5">
+                                        <label>{{'lab9'|translate}}：</label>
+                                        <input style="background-color: white" readonly="readonly" type="text" class="form-control layui-input col-sm-4" ng-value="langId==1?e_area_names[0].hk:(langId==2?e_area_names[0].cn:e_area_names[0].en)" />
+                                    </div>
+                                    <div class="jmeterDiv5-div"></div>
+                                    <div class="form-group jmeterDiv6">
+                                        <label>{{'lab11'|translate}}:</label>
+                                        <input name="ladate5" type="text" class="form-control layui-input col-sm-4" id="ladate5"/>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                            <div style="clear: both;"></div>
+                            <div class="form-group">
+                                <label>{{'lab12'|translate}}:</label>
+                            </div>
+                            <div class="form-group" style="margin-top: -30px;">
+                                <label></label>
+                                <input type="text" class="form-control" name="email" ng-model="e.email" />
+                            </div>
+                            <div class="form-group">
+                                <label>{{'lab13'|translate}}</label>
+                            </div>
+                            <button class="btn btn-default" type="button" style="float: right;background-color: #71288E;color: white;padding: 10px 30px;" ng-click="eFormContentSubmit()">{{'lab14'|translate}}</button>
+
+                           <div style="clear: both;"></div>
+                        </div>
+
+
+                    </div>
+
+                    <!-- error-->
+                    <div ng-show="eFormError" class="eForm-div1" style="border-radius: 10px;color: #9960a7;">
+                        <p class="list-group-item active ng-binding" style="background-color: #71288E;border-color: #71288E;border-top-left-radius: 10px;border-top-right-radius: 10px;font-size: 24px;">
+                            {{'lab19'|translate}}
+                        </p>
+                        <div style="padding: 10px;">
+                            <element ng-if="data.code == 404">
+                                {{'lab20'|translate}}
+                            </element>
+                            <element ng-if="data.code == 500">
+                                {{'error1'|translate}}
+                            </element>
+                            <div style="clear: both;"></div>
+                            <button class="btn btn-default" type="submit" style="float: left;background-color: #71288E;color: white;padding: 10px 30px;margin-top: 80px;" ng-click="getEformContent()">{{'lab21'|translate}}</button>
+                            <div style="clear: both;"></div>
+                        </div>
+
+                    </div>
+
+                    <!-- success-->
+                    <div ng-show="eFormSuccess" class="eForm-div1" style="border-radius: 10px;color: #9960a7;">
+                        <p class="list-group-item active ng-binding" style="background-color: #71288E;border-color: #71288E;border-top-left-radius: 10px;border-top-right-radius: 10px;font-size: 24px;">
+                            {{'lab22'|translate}}
+                        </p>
+                        <div style="padding: 10px;">
+                            <div class="form-group confirmation-test">
+                                <div>{{'lab23'|translate}}
+                                </div>
+                                <div style="margin: 20px 0px;">{{'lab24'|translate}}</div>
+                                <p class="list-group-item active ng-binding" style="background-color: #71288E;border-color: #71288E;font-size: 24px;width: 250px;margin: auto;font-weight: bold;">
+                                    E-IN-{{data.result["key"]}}
+                                </p>
+                            </div>
+
+                            <div style="clear: both;"></div>
+                            <button class="btn btn-default" type="submit" style="float: right;background-color: #71288E;color: white;padding: 10px 30px;margin-top: 80px;"  ng-click="getEformContentDone()">{{'lab25'|translate}}</button>
+                            <div style="clear: both;"></div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="scrollToTop" style="display: none;">
+    <img th:src="@{/img/scroll-to-top.png}" alt="Back To Top">
+</div>
+
+
+</body>
+</html>

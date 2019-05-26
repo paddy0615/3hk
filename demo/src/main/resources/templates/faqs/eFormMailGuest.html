@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FAQS | HK Express</title>
+</head>
+<body>
+<div th:if="${langId == 1}">
+    <span>尊敬的客人，</span>
+    <div class="row" style="margin-bottom: 35px;">
+        <p>感謝您選擇乘搭香港快運航空。</p>
+        <p>此電子郵件是確認我們已收到您的电子表格。此個案的編號為E-IN-<span th:text="${random}"></span>，我們將儘快處理並回復您。</p>
+        <p>如有任何查詢，請致電我們的客戶服務熱線。</p>
+        <p>HK Express Guest Relations</p>
+        <div>
+            <p style="height: 8px;">Tel: <span style="color: blue;text-decoration:underline;">(852) 3902-0288</span></p>
+            <p style="height: 8px;">E-mail : <span style="color: blue;text-decoration:underline;">guest.relations@hkexpress.com</span></p>
+            <p style="height: 8px;">Website : <span style="color: blue;text-decoration:underline;">www.hkexpress.com</span></p>
+        </div>
+    </div>
+</div>
+<div th:if="${langId == 2}">
+    <span>尊敬的客人，</span>
+    <div class="row" style="margin-bottom: 35px;">
+        <p>感谢您选择乘搭HK Express。</p>
+        <p>此电子邮件是确认我们已收到您的电子表格。此个案的编号为E-IN-<span th:text="${random}"></span>，我们将尽快处理并回复您。</p>
+        <p>如有任何查询，请致电我们的客户服务热线。</p>
+        <p>HK Express Guest Relations</p>
+        <div>
+            <p style="height: 8px;">Tel: <span style="color: blue;text-decoration:underline;">(852) 3902-0288</span></p>
+            <p style="height: 8px;">E-mail : <span style="color: blue;text-decoration:underline;">guest.relations@hkexpress.com</span></p>
+            <p style="height: 8px;">Website : <span style="color: blue;text-decoration:underline;">www.hkexpress.com</span></p>
+        </div>
+    </div>
+</div>
+<div th:if="${langId == 4}">
+    <span>尊敬なるお客様：</span>
+    <div class="row" style="margin-bottom: 35px;">
+        <p>香港エクスプレスをお選びいただいて、誠に有難う御座います！</p>
+        <p> お客様のメールを承りました。番号E-IN-<span th:text="${random}"></span> の件について、こちらはお客様の用件を対応致して、できるだけ早めに返事いたします。</p>
+        <p>もし問い合わせがあれば、コールセンター連絡ください。</p>
+        <p>HK Express Guest Relations</p>
+        <div>
+            <p style="height: 8px;">電話番号： <span style="color: blue;text-decoration:underline;">(852) 3902-0288</span></p>
+            <p style="height: 8px;">メール：<span style="color: blue;text-decoration:underline;">guest.relations@hkexpress.com</span></p>
+            <p style="height: 8px;">ウェブサイト：<span style="color: blue;text-decoration:underline;">www.hkexpress.com</span></p>
+        </div>
+    </div>
+</div>
+<div th:if="${langId == 5}">
+    <span>친애하는 손님,</span>
+    <div class="row" style="margin-bottom: 35px;">
+        <p>홍콩 익스프레스 항공을 이용해 주셔서 감사합니다.</p>
+        <p>본 이메일은 귀하의 양식을 접수했음을 확인합니다. 양식 번호는 E-IN-<span th:text="${random}"></span> 이며 가능한 한 빨리 처리하고 답변 해 드리겠습니다.</p>
+        <p>문의 사항은 고객 서비스 센터에 문의하십시오.</p>
+        <p>HK Express Guest Relations</p>
+        <div>
+            <p style="height: 8px;">Tel: <span style="color: blue;text-decoration:underline;">(852) 3902-0288</span></p>
+            <p style="height: 8px;">E-mail : <span style="color: blue;text-decoration:underline;">guest.relations@hkexpress.com</span></p>
+            <p style="height: 8px;">Website : <span style="color: blue;text-decoration:underline;">www.hkexpress.com</span></p>
+        </div>
+    </div>
+</div>
+<div th:if="${langId == 6}">
+    <span>Dear Guest,</span>
+    <div class="row" style="margin-bottom: 35px;">
+        <p>Thank you for choosing HK Express.</p>
+        <p>This email is to confirm that your E-Form has been received and here's your case number E-IN-<span th:text="${random}"></span>,We will look into the case and get back to you soon.</p>
+        <p>Should you have any queries, please do not hesitate to contact us.</p>
+        <p>Yours sincerely,</p>
+        <p>HK Express Guest Relations</p>
+        <div>
+            <p style="height: 8px;">Tel: <span style="color: blue;text-decoration:underline;">(852) 3902-0288</span></p>
+            <p style="height: 8px;">E-mail : <span style="color: blue;text-decoration:underline;">guest.relations@hkexpress.com</span></p>
+            <p style="height: 8px;">Website : <span style="color: blue;text-decoration:underline;">www.hkexpress.com</span></p>
+        </div>
+    </div>
+</div>
+<p><img src="cid:faq_top3"/></p>
+
+</body>
+</html>

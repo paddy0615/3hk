@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>FAQS | HK Express</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/favicon-32x32.png}"/>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/assets/bootstrap.min.css}" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link th:href="@{/css/assets/ie10-viewport-bug-workaround.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/assets/dashboard.css}" rel="stylesheet">
+    <script th:src="@{/js/assets/jquery.js}"></script>
+    <script th:src="@{/js/assets/jqPaginator.min.js}"></script>
+    <link th:href="@{/css/assets/myPage.css}" rel="stylesheet">
+    <script th:src="@{/js/layer/layer.js}"></script>
+    <script th:src="@{/js/assets/angular.js}"></script>
+    <script th:src="@{/js/admin/directive.js}"></script>
+    <script th:src="@{/js/admin/faqThree.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:inline="javascript">
+        var ctx = [[@{/}]];
+    </script>
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script th:src="@{/js/assets/ie8-responsive-file-warning.js}"></script><![endif]-->
+    <script th:src="@{/js/assets/ie-emulation-modes-warning.js}"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body cz-shortcut-listen="true" ng-app="myapp" ng-controller="faqTwoController">
+<top-Directive></top-Directive>
+
+<div class="container-fluid">
+    <div class="row">
+        <left-Directive></left-Directive>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="row" style="padding-bottom: 9px;margin-bottom: 20px;border-bottom: 1px solid #eee;">
+                <span style="font-size: 36px;">Question List</span>
+                <div class="input-group col-sm-9" style="float: right;margin-top: 10px;">
+                    <input ng-model="searchTest" type="text" class="form-control" placeholder="{{selectTest}}"  ng-keyup="onKeyup(event)">
+                    <span class="input-group-btn">
+                          <button class="btn btn-default" type="button" ng-click="getSearch()"><i class="glyphicon glyphicon-search"></i></button>
+                    </span>
+                </div>
+            </div>
+
+            <div class="row" style="margin-bottom: 20px;">
+                <!-- button -->
+                <div class="col-lg-5" style="float: right;text-align: right;">
+                    <button class="btn btn-default" type="button" ng-click="getEdit(0)">Add</button>
+                    <button class="btn btn-default" type="button" ng-click="getDelete(0)">Delete Selected</button>
+                    <button class="btn btn-default" type="button" ng-click="editStatus(0,1)">Show Selected</button>
+                    <button class="btn btn-default" type="button" ng-click="editStatus(0,0,1)">Hide Selected</button>
+                </div>
+            </div>
+
+            <div class="row" style="margin-bottom: 10px;">
+                <!-- librabry select -->
+                <label style="margin-top: 5px;margin-left: 30px;float: left;">Series: </label>
+                <div class="col-md-2">
+                    <select ng-model="fl_id" class="form-control" ng-change="clickLanguage()"
+                            ng-options="l.id  as l.title for l in librabries">
+                    </select>
+                </div>
+
+                <!-- language select -->
+                <label style="margin-top: 5px;margin-left: 50px;float: left;">Language: </label>
+                <div class="col-md-2">
+                    <select ng-model="langId" class="form-control" ng-change="clickLanguage()"
+                            ng-options="language.id  as language.title for language in languages">
+                    </select>
+                </div>
+
+                <!-- Status select -->
+                <label style="margin-top: 5px;margin-left: 50px;float: left;">Status: </label>
+                <div class="col-md-2">
+                    <select ng-model="dl_status" class="form-control" ng-change="clickLanguage()"
+                            ng-options="d.id as d.name for d in dl_statuss">
+                    </select>
+                </div>
+
+
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th><input type="checkbox" name="checkboxAll" ng-click="updateSelectionAll($event)"></th>
+                        <th>Series</th>
+                        <th>Title</th>
+                        <th>Language</th>
+                        <th>Status</th>
+                        <th>Update Date</th>
+                        <th>Weights</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="detailed in detaileds">
+                        <td> <input style="vertical-align:top;"  type="checkbox" name="checkboxClien" ng-click="updateSelection($event,detailed.dl_id)" value="{{detailed.dl_id}}">{{$index+1}}</td>
+                        <td>{{detailed.fl_title}}</td>
+                        <td class="col-md-4">{{detailed.dl_title}}</td>
+                        <td>{{detailed.lang_title}}</td>
+                        <td ng-if="detailed.dl_status == 1">Show</td>
+                        <td ng-if="detailed.dl_status == 0">Hide</td>
+                        <td>{{detailed.dl_updatedate.substring(0,16)}}</td>
+                        <td>{{detailed.dl_weights}}</td>
+                        <td style="text-align: right;">
+                            <!--<button class="btn btn-default" type="button" ng-show="!searchType" ng-click="editTop(detailed.id)" >Top</button>&lt;!&ndash;置顶&ndash;&gt;-->
+                            <button class="btn btn-default" type="button" ng-if="detailed.dl_status == 1" ng-click="editStatus(detailed.dl_id,0)">Hide</button><!--已发表-->
+                            <button class="btn btn-default" type="button" ng-if="detailed.dl_status == 0" ng-click="editStatus(detailed.dl_id,1)">Show</button><!--未发表-->
+                            <button class="btn btn-default" type="button" ng-click="getEdit(detailed.dl_id)" >Edit</button>
+                            <button class="btn btn-default" type="button" ng-click="getDelete(detailed.dl_id)">Delete</button>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- 分页-->
+            <div style="text-align: right;">
+                <ul class="pagination" id="pagination"></ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/assets/bootstrap.min.js}"></script>
+<script th:src="@{/js/assets/holder.min.js}"></script>
+<script th:src="@{/js/assets/ie10-viewport-bug-workaround.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>FAQS | HK Express</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/favicon-32x32.png}"/>
+    <link th:href="@{/css/assets/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/assets/ie10-viewport-bug-workaround.css}" rel="stylesheet">
+    <link th:href="@{/css/assets/dashboard.css}" rel="stylesheet">
+    <script th:src="@{/js/assets/jquery.js}"></script>
+    <script th:src="@{/js/layer/layer.js}"></script>
+    <script th:src="@{/js/assets/angular.js}"></script>
+    <script th:src="@{/js/admin/directive.js}"></script>
+    <script th:src="@{/js/admin/eForm.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:inline="javascript">
+        var ctx = [[@{/}]];
+    </script>
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script th:src="@{/js/assets/ie8-responsive-file-warning.js}"></script><![endif]-->
+    <script th:src="@{/js/assets/ie-emulation-modes-warning.js}"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body cz-shortcut-listen="true" ng-app="myapp" ng-controller="eFormSetController">
+<top-Directive></top-Directive>
+
+<div class="container-fluid">
+    <div class="row">
+        <left-Directive></left-Directive>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">E-Form</h1>
+
+            <div class="row">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Email Subject :</label>
+                        <label style="text-indent: 2em;font-weight: normal;" class="control-label">{{title}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Date :</label>
+                        <label style="text-indent: 2em;font-weight: normal;" class="control-label">{{eform.updateDate}}</label>
+                    </div>
+                    <div class="form-group" ng-if="eform.pnr">
+                        <label class="col-sm-2 control-label">PNR :</label>
+                        <label style="text-indent: 2em;font-weight: normal;" class="control-label">{{eform.pnr}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">First Name :</label>
+                        <label style="text-indent: 2em;font-weight: normal;" class="control-label">{{eform.firstname}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Last Name :</label>
+                        <label style="text-indent: 2em;font-weight: normal;" class="control-label">{{eform.lastname}}</label>
+                    </div>
+
+
+                    <div class="form-group" ng-if="eform.departing">
+                        <label class="col-sm-2 control-label">Departing From :</label>
+                        <label style="text-indent: 2em;font-weight: normal;" class="control-label">{{eform.departing}}</label>
+                    </div>
+                    <div class="form-group" ng-if="eform.going">
+                        <label class="col-sm-2 control-label">Going to :</label>
+                        <label style="text-indent: 2em;font-weight: normal;" class="control-label">{{eform.going}}</label>
+                    </div>
+                    <div class="form-group" ng-if="eform.departingdate">
+                        <label class="col-sm-2 control-label">Leaving on :</label>
+                        <label style="text-indent: 2em;font-weight: normal;" class="control-label">{{eform.departingdate}}</label>
+                    </div>
+                    <div class="form-group" ng-if="eform.departingnew">
+                        <label class="col-sm-2 control-label">Departing From :</label>
+                        <label style="text-indent: 2em;font-weight: normal;" class="control-label">{{eform.departingnew}}</label>
+                    </div>
+                    <div class="form-group" ng-if="eform.goingnew">
+                        <label class="col-sm-2 control-label">Going to :</label>
+                        <label style="text-indent: 2em;font-weight: normal;" class="control-label">{{eform.goingnew}}</label>
+                    </div>
+                    <div class="form-group" ng-if="eform.goingdate">
+                        <label class="col-sm-2 control-label">Returning on :</label>
+                        <label style="text-indent: 2em;font-weight: normal;" class="control-label">{{eform.goingdate}}</label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Email Address :</label>
+                        <label style="text-indent: 2em;font-weight: normal;" class="control-label">{{eform.email}}</label>
+                    </div>
+
+                    <!-- 证明类别-->
+                    <div class="form-group" ng-if="eform.ecertificatetype > 0">
+                        <label class="col-sm-2 control-label">Certificate Nature :</label>
+                        <label style="text-indent: 2em;font-weight: normal;" class="control-label">{{Certificate_Nature}}</label>
+                    </div>
+
+                </form>
+
+                <p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">E-inquiry Form Number :</label>
+                    <label style="font-weight: normal;" class="control-label">{{eform.random}}</label>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/assets/bootstrap.min.js}"></script>
+<script th:src="@{/js/assets/holder.min.js}"></script>
+<script th:src="@{/js/assets/ie10-viewport-bug-workaround.js}"></script>
+
+</body>
+</html>

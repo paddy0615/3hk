@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FAQS | HK Express</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/favicon-32x32.png}"/>
+    <link rel="stylesheet" th:href="@{/css/assets/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <script th:src="@{/js/assets/jquery.js}"></script>
+    <script th:src="@{/js/layer/layer.js}"></script>
+    <script th:src="@{/js/assets/angular.js}"></script>
+    <script th:src="@{/js/search.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:inline="javascript">
+        var ctx = [[@{/}]];
+    </script>
+
+</head>
+<body ng-app="myapp" ng-controller="serachController">
+<div class="content" style="width: 700px">
+    <div class="header" style="margin-top: 40px;">
+        <div class="header-loagin">
+            <a href="https://www.hkexpress.com/en-hk"><img th:src="@{/img/faq_top4.png}"/></a>
+        </div>
+    </div>
+    <div class="col-sm-11" id="so" style="padding-left: 0px;">
+        <div class="input-group">
+            <input ng-model="searchText" style="height: 44px;" id="search" type="text" placeholder="Search..." class="form-control" ng-keyup="onKeyup(event)">
+            <span class="input-group-addon"><a href="javascript:;" ng-click="getSearch()"><span class="glyphicon glyphicon-search"></span></a></span>
+        </div>
+    </div>
+    <div class="content-box col-sm-11" style="padding-left: 0px;">
+        <ul>
+            <li ng-repeat="detailed in result.detaileds"><a href="javascript:;" ng-click="getDetailed(detailed.id)">{{detailed.title}}</a></li>
+        </ul>
+    </div>
+
+    <div class="content-box col-sm-11" style="padding-left: 0px;margin-top: 200px;">
+        <div class="list-group">
+            <a href="javascript:;" class="list-group-item active" style="background-color: #71288E;border-color: #71288E;border-top-left-radius: 25px;">
+                Recent Asked
+            </a>
+            <a ng-repeat="detailed in hotspots" class="list-group-item" href="javascript:;" ng-click="getDetailed(detailed.id)">{{detailed.title}}</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

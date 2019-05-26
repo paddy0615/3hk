@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FAQS | HK Express</title>
+    <style>
+        .control-label1{
+              font-weight: bold;
+              width: 160px;
+          }
+        .control-label2{
+        }
+        tr{
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+<span>From HK Express Smart Form:</span>
+    <div class="row" style="margin: 10px;">
+        <table style="width: 800px;">
+            <tr th:if="${not #lists.isEmpty(title)}">
+                <td class="control-label1">Email Subject :</td>
+                <td class="control-label2" th:text="${title}"></td>
+            </tr>
+            <tr th:if="${not #lists.isEmpty(eform.updateDate)}">
+                <td class="control-label1">Date :</td>
+                <td class="control-label2" th:text="${#dates.format(eform.updateDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            </tr>
+            <tr th:if="${not #lists.isEmpty(eform.pnr)}">
+                <td class="control-label1">PNR :</td>
+                <td class="control-label2" th:text="${eform.pnr}"></td>
+            </tr>
+            <tr th:if="${not #lists.isEmpty(eform.firstname)}">
+                <td class="control-label1">First Name :</td>
+                <td class="control-label2" th:text="${eform.firstname}"></td>
+            </tr>
+            <tr th:if="${not #lists.isEmpty(eform.lastname)}">
+                <td class="control-label1">Last Name :</td>
+                <td class="control-label2" th:text="${eform.lastname}"></td>
+            </tr>
+
+            <tr th:if="${not #lists.isEmpty(eform.departing)}">
+                <td class="control-label1">Departing From :</td>
+                <td class="control-label2" th:text="${eform.departing}"></td>
+            </tr>
+            <tr th:if="${not #lists.isEmpty(eform.going)}">
+                <td class="control-label1">Going to :</td>
+                <td class="control-label2" th:text="${eform.going}"></td>
+            </tr>
+            <tr th:if="${not #lists.isEmpty(eform.departingdate)}">
+                <td class="control-label1">Leaving on :</td>
+                <td class="control-label2" th:text="${#dates.format(eform.departingdate, 'yyyy-MM-dd')}"></td>
+            </tr>
+            <tr th:if="${not #lists.isEmpty(eform.departingnew)}">
+                <td class="control-label1">Departing From :</td>
+                <td class="control-label2" th:text="${eform.departingnew}"></td>
+            </tr>
+            <tr th:if="${not #lists.isEmpty(eform.goingnew)}">
+                <td class="control-label1">Going to :</td>
+                <td class="control-label2" th:text="${eform.goingnew}"></td>
+            </tr>
+            <tr th:if="${not #lists.isEmpty(eform.goingdate)}">
+                <td class="control-label1">Returning on :</td>
+                <td class="control-label2" th:text="${#dates.format(eform.goingdate, 'yyyy-MM-dd')}"></td>
+            </tr>
+            <tr th:if="${not #lists.isEmpty(eform.email)}">
+                <td class="control-label1">Email Address :</td>
+                <td class="control-label2" th:text="${eform.email}"></td>
+            </tr>
+            <!-- 证明类别-->
+            <tr th:if="${eform.ecertificatetype > 0}">
+                <td class="control-label1">Certificate Nature :</td>
+                <td class="control-label2" th:text="${Certificate_Nature}"></td>
+            </tr>
+        </table>
+
+
+    </div>
+
+<div>
+<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
+    <div class="row" style="margin: 10px;">
+        <table style="width: 800px;">
+            <tr th:if="${not #lists.isEmpty(eform.random)}">
+                <td class="control-label1" style="width: 230px;">E-inquiry Form Number :</td>
+                <td class="control-label2" >
+                    <span>E-IN-</span>
+                    <span th:text="${eform.random}"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <p><hr style="HEIGHT: 1px; WIDTH: 210px" align="left" color="#b5c4df" size="1"></p>
+    <img src="cid:faq_top4"/>
+</div>
+
+
+</body>
+</html>

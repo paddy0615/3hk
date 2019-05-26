@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>FAQS | HK Express</title>
+        <link rel="icon" type="image/x-icon" th:href="@{/img/favicon-32x32.png}"/>
+        <link th:href="@{/css/assets/bootstrap.min.css}" rel="stylesheet">
+        <link th:href="@{/css/assets/ie10-viewport-bug-workaround.css}" rel="stylesheet">
+        <link th:href="@{/css/assets/dashboard.css}" rel="stylesheet">
+        <script th:src="@{/js/assets/jquery-1.7.2.min.js}"></script>
+        <script th:src="@{/js/assets/jqPaginator.min.js}"></script>
+        <link th:href="@{/css/assets/myPage.css}" rel="stylesheet">
+        <script th:src="@{/js/layer/layer.js}"></script>
+        <script th:src="@{/js/laydate/laydate.js}"></script>
+        <script th:src="@{/js/assets/angular.js}"></script>
+        <script th:src="@{/js/admin/directive.js}"></script>
+        <script th:src="@{/js/admin/faqOne.js}"></script>
+        <script th:src="@{/js/common.js}"></script>
+        <script th:src="@{/js/assets/myPage.js}"></script>
+        <script th:inline="javascript">
+            var ctx = [[@{/}]];
+        </script>
+
+        <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+        <!--[if lt IE 9]><script th:src="@{/js/assets/ie8-responsive-file-warning.js}"></script><![endif]-->
+        <script th:src="@{/js/assets/ie-emulation-modes-warning.js}"></script>
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+      </head>
+<body cz-shortcut-listen="true" ng-app="myapp" ng-controller="faqOneController">
+    <top-Directive></top-Directive>
+
+    <div class="container-fluid">
+      <div class="row">
+        <left-Directive></left-Directive>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <div class="row" style="padding-bottom: 9px;margin-bottom: 20px;border-bottom: 1px solid #eee;">
+              <div class="col-lg-5">
+                  <span style="font-size: 36px;">FAQ Library</span>
+              </div>
+          </div>
+          <div class="row" style="text-align: right;padding-right: 20px;">
+            <!-- add -->
+          <div>
+              <a class="btn btn-default" th:href="@{'/appPage/admin/faqOneEdit?fl_id=0'}" >Add</a>
+          </div>
+
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Series</th>
+                  <th>Update Date</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="l in librabries">
+                  <td><!--<input style="vertical-align:top;" type="checkbox" name="checkboxClien" ng-click="updateSelection($event,categorie.id)" value="{{categorie.id}}">-->{{$index+1}}</td>
+                  <td class="col-md-5">{{l.title}}</td>
+                  <td>{{l.updatedate.substring(0,16)}}</td>
+                  <td style="text-align: right;">
+                      <a class="btn btn-default" th:href="@{'/appPage/admin/faqTwo?fl_id={{l.id}}'}" >Select</a>
+                      <a class="btn btn-default" th:href="@{'/appPage/admin/faqOneEdit?fl_id={{l.id}}'}" >Edit</a>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+          <!-- 分页-->
+          <div style="text-align: right;">
+            <ul class="pagination" id="pagination"></ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script  th:src="@{/js/assets/vendor/jquery.min.js}"><\/script>')</script>
+    <script th:src="@{/js/assets/bootstrap.min.js}"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script th:src="@{/js/assets/holder.min.js}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script th:src="@{/js/assets/ie10-viewport-bug-workaround.js}"></script>
+
+</body>
+</html>

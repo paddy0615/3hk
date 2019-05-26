@@ -1,0 +1,56 @@
+##开发环境
+server:
+  port: 8080
+  address: 0.0.0.0
+  servlet:
+    context-path: /hkexpress
+##thymeleaf页面模板配置
+web:
+  upload-path: C:/faqsonic/faq
+
+spring:
+  # 多个springboot项目部署,需加
+  jmx:
+    enabled: false
+  #jpa配置
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  tomcat:
+    uri-encoding: UTF-8
+  datasource:
+    ## 118.143.2.3 -> faqsdatetest(开发) , faqsDate(测试)
+    url: jdbc:mysql://118.143.2.7:3306/faqsDateDev208?characterEncoding=UTF-8
+    username: root
+    password: sonic@xunyu
+    driver-class-name: com.mysql.jdbc.Driver
+  mvc:
+    static-path-pattern: /**
+  thymeleaf:
+    cache: false
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 0
+      #单个数据的大小
+      max-file-size: 80Mb
+      #总数据的大小
+      max-request-size: 200Mb
+  # JavaMailSender 邮件发送的配置
+  mail:
+    host: mail.sonic-teleservices.com
+    username: hke_smartform@sonic-teleservices.com
+    password: sonic
+    default-encoding: UTF-8
+    properties:
+      mail.smtp.socketFactory.fallback: true
+      mail.smtp.starttls.enable: true
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.example.demo.bean
+  configuration:
+    map-underscore-to-camel-case: true

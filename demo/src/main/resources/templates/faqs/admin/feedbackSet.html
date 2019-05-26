@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>FAQS | HK Express</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/favicon-32x32.png}"/>
+    <link th:href="@{/css/assets/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/assets/ie10-viewport-bug-workaround.css}" rel="stylesheet">
+    <link th:href="@{/css/assets/dashboard.css}" rel="stylesheet">
+    <script th:src="@{/js/assets/jquery.js}"></script>
+    <script th:src="@{/js/layer/layer.js}"></script>
+    <script th:src="@{/js/assets/angular.js}"></script>
+    <script th:src="@{/js/admin/directive.js}"></script>
+    <script th:src="@{/js/admin/feedback.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:inline="javascript">
+        var ctx = [[@{/}]];
+    </script>
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script th:src="@{/js/assets/ie8-responsive-file-warning.js}"></script><![endif]-->
+    <script th:src="@{/js/assets/ie-emulation-modes-warning.js}"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body cz-shortcut-listen="true" ng-app="myapp" ng-controller="feedbackSetController">
+<top-Directive></top-Directive>
+
+<div class="container-fluid">
+    <div class="row">
+        <left-Directive></left-Directive>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">FAQ Feedback</h1>
+
+            <div class="row">
+                <form class="form-horizontal" ng-submit="submitUpdate()">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Language :</label>
+                        <label style="text-indent: 2em;font-weight: normal;" class="control-label">{{feedback.lang_title}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">FAQ Title :</label>
+                        <label style="text-indent: 2em;font-weight: normal;" class="control-label">{{feedback.detailed_title}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">IP :</label>
+                        <label style="text-indent: 2em;font-weight: normal;" class="control-label">{{feedback.ip}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Rating :</label>
+                        <label style="text-indent: 2em;font-weight: normal;" class="control-label">
+                            <element ng-if="feedback.type == 1">+1</element>
+                            <element ng-if="feedback.type == 2">-1</element>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Comment :</label>
+                        <div style="display: -webkit-box;width: 700px;margin-top: 8px;text-indent: 2em;">{{feedback.content}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Contact Email :</label>
+                        <label style="text-indent: 2em;font-weight: normal;" class="control-label">{{feedback.email}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Contact Number :</label>
+                        <label style="text-indent: 2em;font-weight: normal;" class="control-label">{{feedback.number}}</label>
+                    </div>
+                    <element ng-if="feedback.type == 2 && feedback.content != ''">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Comment Status :</label>
+                            <label style="text-indent: 2em;font-weight: normal;" class="control-label">
+                                <element ng-if="feedback.contentStatus == 0">
+                                    <div style="color:red;">Open</div>
+                                </element>
+                                <element ng-if="feedback.contentStatus == 1">
+                                    Close
+                                </element>
+                            </label>
+                        </div>
+                    </element>
+                    <element ng-if="feedback.type == 2 && feedback.content != ''">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+                            <label style="text-indent: 2em;font-weight: normal;" class="control-label">
+                                <element ng-if="feedback.contentStatus == 0">
+                                    <button class="btn btn-default" type="button"  ng-click="updateFeedbackStatus(feedback.id,1)" >Close</button>
+                                </element>
+                                <element ng-if="feedback.contentStatus == 1">
+                                    <button class="btn btn-default" type="button"  ng-click="updateFeedbackStatus(feedback.id,0)" >Open</button>
+                                </element>
+                            </label>
+                        </div>
+                    </element>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/assets/bootstrap.min.js}"></script>
+<script th:src="@{/js/assets/holder.min.js}"></script>
+<script th:src="@{/js/assets/ie10-viewport-bug-workaround.js}"></script>
+
+</body>
+</html>
