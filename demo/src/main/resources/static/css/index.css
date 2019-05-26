@@ -13,6 +13,9 @@ body{
 .header-loagin{
     float: left;
 }
+.header-loagin img{
+    width: 108px;
+}
 .header-lan{
     float: right;
     line-height: 50px;

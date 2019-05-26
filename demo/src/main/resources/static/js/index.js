@@ -1,107 +1,4 @@
 var myapp = angular.module("myapp",['pascalprecht.translate']);
-// online chat
-function onlineChat(langId) {
-    if(langId == 1){
-        // 香港 (繁體)
-        var se = document.createElement('script'); se.type = 'text/javascript'; se.async = true;
-        se.src = 'https://storage.googleapis.com/sonic-teleservices/js/8168ca61-a381-422e-9803-44e04dabc878.js';
-        var done = false;
-        se.onload = se.onreadystatechange = function() {
-            if (!done&&(!this.readyState||this.readyState==='loaded'||this.readyState==='complete')) {
-                done = true;
-                SonicTeleservices.setTitle("聯絡我們!"); // for the pre-chat form
-                SonicTeleservicesChat.setTitle("透過線上客服與我們聯絡"); // for the chat-form
-                SonicTeleservices.setProactiveAutocloseDelay(0.5);// delay proactive auto close after 30 sec
-            }
-        };
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(se, s);
-    }else if(langId == 2){
-        // 中国 简体
-        var se = document.createElement('script'); se.type = 'text/javascript'; se.async = true;
-        se.src = 'https://storage.googleapis.com/sonic-teleservices/js/cd66238e-805c-4fd2-b3e1-ccabddaf8a12.js';
-        var done = false;
-        se.onload = se.onreadystatechange = function() {
-            if (!done&&(!this.readyState||this.readyState==='loaded'||this.readyState==='complete')) {
-                done = true;
-                SonicTeleservices.setTitle("联络我们!"); // for the pre-chat form
-                SonicTeleservicesChat.setTitle("透过在线客服与我们联络"); // for the chat-form
-                SonicTeleservices.setProactiveAutocloseDelay(0.5);// delay proactive auto close after 30 sec
-            }
-        };
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(se, s);
-    }else if(langId == 3){
-        // 台灣 (繁體)
-        var se = document.createElement('script'); se.type = 'text/javascript'; se.async = true;
-        se.src = 'https://storage.googleapis.com/sonic-teleservices/js/8168ca61-a381-422e-9803-44e04dabc878.js';
-        var done = false;
-        se.onload = se.onreadystatechange = function() {
-            if (!done&&(!this.readyState||this.readyState==='loaded'||this.readyState==='complete')) {
-                done = true;
-                SonicTeleservices.setTitle("聯絡我們!"); // for the pre-chat form
-                SonicTeleservicesChat.setTitle("透過線上客服與我們聯絡"); // for the chat-form
-                SonicTeleservices.setProactiveAutocloseDelay(0.5);// delay proactive auto close after 30 sec
-            }
-        };
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(se, s);
-    }else if(langId == 4){
-        // 日本 (日本語))
-        var se = document.createElement('script'); se.type = 'text/javascript'; se.async = true;
-        se.src = 'https://storage.googleapis.com/sonic-teleservices/js/d1fa9911-1e41-4df1-a090-a1fd9454a030.js';
-        var done = false;
-        se.onload = se.onreadystatechange = function() {
-            if (!done&&(!this.readyState||this.readyState==='loaded'||this.readyState==='complete')) {
-                done = true;
-                SonicTeleservices.setTitle("連絡先情報!"); // for the pre-chat form
-                SonicTeleservicesChat.setTitle("私たちとチャットしましょう"); // for the chat-form
-                SonicTeleservices.setProactiveAutocloseDelay(0.5);// delay proactive auto close after 30 sec
-            }
-        };
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(se, s);
-    }else if(langId == 5){
-        // 대한민국(한국어)
-        var se = document.createElement('script'); se.type = 'text/javascript'; se.async = true;
-        se.src = 'https://storage.googleapis.com/sonic-teleservices/js/ed84ba43-860a-43fc-87ac-29e1fb8ce6ab.js';
-        var done = false;
-        se.onload = se.onreadystatechange = function() {
-            if (!done&&(!this.readyState||this.readyState==='loaded'||this.readyState==='complete')) {
-                done = true;
-                SonicTeleservices.setTitle("연락처!"); // for the pre-chat form
-                SonicTeleservicesChat.setTitle("연락해 주십시오."); // for the chat-form
-                SonicTeleservices.setProactiveAutocloseDelay(0.5);// delay proactive auto close after 30 sec
-            }
-        };
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(se, s);
-    }else{
-        // Hong Kong (EN)
-        var se = document.createElement('script'); se.type = 'text/javascript'; se.async = true;
-        se.src = 'https://storage.googleapis.com/sonic-teleservices/js/ff4b2b7a-dfbb-47d8-9e51-766c426eb3cb.js';
-        var done = false;
-        se.onload = se.onreadystatechange = function() {
-            if (!done&&(!this.readyState||this.readyState==='loaded'||this.readyState==='complete')) {
-                done = true;
-                SonicTeleservices.setTitle("Contact us!"); // for the pre-chat form
-                SonicTeleservicesChat.setTitle("Chat with us!"); // for the chat-form
-                SonicTeleservices.setProactiveAutocloseDelay(0.5);// delay proactive auto close after 30 sec
-            }
-        };
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(se, s);
-        <!-- begin SonicTeleservices code -->
-        /*var se = document.createElement('script'); se.type = 'text/javascript'; se.async = true;
-        se.src = 'https://storage.googleapis.com/sonic-teleservices/js/09bcc7b8-3035-4460-8c0f-a080d4815c17.js';
-        var done = false;
-        se.onload = se.onreadystatechange = function() {
-            if (!done&&(!this.readyState||this.readyState==='loaded'||this.readyState==='complete')) {
-                done = true;
-                /!* Place your SonicTeleservices JS API code below *!/
-                /!* SonicTeleservices.allowChatSound(true); Example JS API: Enable sounds for Visitors. *!/
-            }
-        };
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(se, s);*/
-        <!-- end SonicTeleservices code -->
-
-
-    }
-}
 
 myapp.config(['$translateProvider',function($translateProvider){
     var lang = window.localStorage['lang'] || '6';
@@ -156,13 +53,11 @@ myapp.controller("indexController",["$scope","$http","$location","$translate",fu
     $scope.catId =  GetUrlParam("catId")==""?0:GetUrlParam("catId");
     $scope.lang_cout = 5;
     $scope.isGetUrl = false;
-    $scope.cat_title = "";
     //indexShow 显示
     $scope.indexShow = true;
     $scope.searchShow = false;
     // 初始化
     into($scope.langId,$scope.catId);
-    onlineChat($scope.langId);
     function into(langID,catId){
         $http({
             method : 'post',
@@ -183,16 +78,7 @@ myapp.controller("indexController",["$scope","$http","$location","$translate",fu
                         return;
                     }
                 })
-                angular.forEach(data.result.categories,function (each) {
-                    if(catId == each.id){
-                        $scope.cat_title = each.title;
-                        return;
-                    }
-                })
                 $scope.lang_cout = data.result.categories.length;
-                if($scope.cat_title == ""){
-                    $scope.cat_title = data.result.categories[1].title;
-                }
             }else{
                 /* 失败*/
                 layer.alert( 'Abnormal error, please contact the administrator.', {
@@ -329,7 +215,6 @@ myapp.controller("indexDetailedController",["$scope","$http","$sce","$location",
                 $scope.commonLabel7 = commonLabel7($scope.langId);
                 $scope.commonLabel10 = commonLabel10($scope.langId);
 
-                onlineChat($scope.langId);
                 $scope.detailed = data.result.detailed;
                 // 显示内容
                 $scope.content = $sce.trustAsHtml($scope.detailed.content);
