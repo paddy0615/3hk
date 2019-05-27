@@ -1,0 +1,80 @@
+#navbar .navbar-logo{
+    height: 2.625em;
+}
+#navbar .navbar-top {
+    position: relative;
+    float: left;
+    width: 100%;
+    background-color: #f2f2f2;
+}
+#navbar .navbar-top-list li{
+    display: inline-block;
+}
+#navbar .navbar-top-left {
+    float: left;
+}
+
+#navbar .navbar-top-right {
+    float: right;
+    min-width: 25%;
+}
+#navbar .navbar-top-left-list {
+    margin-left: 15px;
+}
+
+.navbar-top-left-list li {
+    padding-right: 30px;
+}
+
+#navbar .navbar-logo-block {
+    padding-right: 30px;
+    position: relative;
+    height: 4.5em;
+}
+
+#navbar .v-align-middle {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+#navbar .navbar-top-right-list>li>a {
+    display: inline-block;
+    color: #000;
+    text-transform: uppercase;
+}
+#navbar .navbar-top-right-list li {
+    height: 4.5em;
+}
+
+
+#navbar .navbar-icon {
+    width: auto;
+    height: 24px;
+    vertical-align: middle;
+}
+
+#navbar .navbar-searchIcon .btn-image{
+    width: 210px;
+}
+#navbar .navbar-searchIcon {
+    float: right;
+    background: url(https://www.three.com.hk/tc/assets/images/background/HK_SVG_Gradient_Organic_2to1_B.jpg) no-repeat;
+    background-size: 500%;
+    background-position: 0 95%;
+    min-height: 4.5em;
+}
+#navbar .navbar-top .v-align-middle{
+    height: 100%;
+}
+#navbar .navbar-searchIcon .btn-image {
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+#navbar .navbar-searchIcon .navbar-label {
+    color: #fff;
+    margin-left: 30px;
+}
+
+

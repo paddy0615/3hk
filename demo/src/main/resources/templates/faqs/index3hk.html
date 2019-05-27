@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="问题,faq">
+    <title>FAQS</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/favicon-32x32.png}"/>
+    <link rel="stylesheet" th:href="@{/css/assets/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/index3hk.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <script th:src="@{/js/assets/jquery.js}"></script>
+    <script th:src="@{/js/layer/layer.js}"></script>
+    <script th:src="@{/js/assets/angular.js}"></script>
+    <script th:src="@{/js/assets/angular-translate.min.js}"></script>
+    <script th:src="@{/js/assets/angular-translate-loader-static-files.min.js}"></script>
+    <script th:src="@{/js/index.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <base th:href="@{/appPage/index}">
+    <script th:inline="javascript">
+        var ctx = [[@{/}]];
+    </script>
+    <style>
+        #SnapABug_bImg{
+            width:100%;
+        }
+        .scrollToTop > img {
+            position: fixed;
+            z-index: 10;
+            bottom: 20px;
+            left: 30px;
+            cursor: pointer;
+        }
+        @media (min-width: 1200px){
+            .container {
+                width: 100%;
+            }
+        }
+        @media (min-width: 992px){
+            .col-md-8 {
+                width: 69.666667%;
+            }
+            .col-md-offset-2 {
+                margin-left: 15.2%;
+            }
+        }
+        @media (min-width: 768px){
+            #navbar .navbar-logo-block a:after{
+                position: absolute;
+                top: 13px;
+                right: 10px;
+                content: ' ';
+                display: inline-block;
+                border-left: 1px solid #000;
+                height: 64%;
+            }
+
+        }
+
+    </style>
+    <script>
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('.scrollToTop').fadeIn();
+                } else {
+                    $('.scrollToTop').fadeOut();
+                }
+            });
+
+            $('.scrollToTop').click(function () {
+                $('html, body').animate({ scrollTop: 0 }, 800);
+                return false;
+            });
+        });
+    </script>
+</head>
+<body ng-app="myapp" ng-controller="indexController">
+
+<div id="navbar">
+    <nav class="navbar-top" role="navigation">
+        <div class="container">
+            <div class="row">
+                <div class="navbar-top-left">
+                    <ul class="navbar-top-left-list navbar-top-list">
+                        <li class="navbar-logo-block"><span class="v-align-middle"></span><a href="https://www.three.com.hk/tc/home.html"><img class="navbar-logo" th:src="@{/img/brandThree.png}" alt="3" /></a></li>
+                        <li class="hidden-xs"><a href="javascript:void(0)" class="navbar-body-anchor" data-menu="buy"><span class="navbar-label">手機及服務計劃</span></a></li>
+                        <li class="hidden-xs"><a href="javascript:void(0)" class="navbar-body-anchor" data-menu="threeAndYou"><span class="navbar-label">漫遊、客戶服務及企業客戶</span></a></li>
+                        <li class="hidden-xs"><a href="http://web.three.com.hk/3supreme/index.html" class="navbar-body-anchor"><span class="navbar-label">3Supreme</span></a></li>
+                    </ul>
+                </div>
+                <div class="navbar-top-right">
+                    <ul class="navbar-top-right-list navbar-top-list">
+                        <li class="subNavLang-wrapper"><span class="v-align-middle"></span><a href="https://www.three.com.hk/en/home.html" id="subNavLang" class="btn-image"><img src="https://www.three.com.hk/media/global/Language Icon_EN_2.svg" class="navbar-icon" alt="" /></a></li>
+                        <li class="navbar-searchIcon"><span class="v-align-middle"></span><button type="button" class="btn-image"><span class="v-align-middle"></span><img th:src="@{/img/search.png}" class="navbar-icon" alt="" /><span class="navbar-label">搜尋</span></button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+
+<div class="scrollToTop" style="display: none;">
+    <img th:src="@{/img/scroll-to-top.png}" alt="Back To Top">
+</div>
+</body>
+</html>

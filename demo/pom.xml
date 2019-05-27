@@ -157,22 +157,6 @@
 
 			</plugin>
 		</plugins>
-		<!--<resources>
-			<resource>
-				<directory>${project.basedir}/src/main/resources</directory>
-				<filtering>true</filtering>
-				<excludes>
-					<exclude>static/css/fonts/**</exclude>
-				</excludes>
-			</resource>
-			<resource>
-				<directory>${project.basedir}/src/main/resources</directory>
-				<filtering>false</filtering>
-				<includes>
-					<include>static/css/fonts/**</include>
-				</includes>
-			</resource>
-		</resources>-->
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
