@@ -50,6 +50,8 @@ myapp.config(['$locationProvider', function($locationProvider) {
 myapp.controller("indexController",["$scope","$http","$location","$translate",function ($scope, $http,$location,$translate) {
     // 设置默认,langId==6语言，英文;catId = 0默认选第二个
     $scope.langId = GetUrlParam("langId")==""?6:GetUrlParam("langId");
+    // 改语言
+    $translate.use($scope.langId.toString());
     $scope.catId =  GetUrlParam("catId")==""?0:GetUrlParam("catId");
     $scope.lang_cout = 5;
     $scope.isGetUrl = false;
@@ -102,6 +104,15 @@ myapp.controller("indexController",["$scope","$http","$location","$translate",fu
         }
         // 强制更新  $scope.apply();
     }
+    // 语言事件-net
+    $scope.clickLanguageNet = function(id) {
+        if($scope.isGetUrl){
+            var url = ctx + "appPage/index?langId="+id+"&catId="+0;
+            clicked(url);
+        }
+        // 强制更新  $scope.apply();
+    }
+
 
     // 类别事件,idnex当前下标，id:类别ID
     $scope.clickCategory = function (idnex,cat) {
@@ -159,7 +170,6 @@ myapp.controller("indexController",["$scope","$http","$location","$translate",fu
     }
     /* 搜索框 结束*/
 
-
     function info1(){
         // 热点数
         $http({
@@ -189,6 +199,8 @@ myapp.controller("indexDetailedController",["$scope","$http","$sce","$location",
     $scope.searchShow = false;
     // 初始化
     into($scope.dlId);
+    // 改语言
+    $translate.use($scope.langId.toString());
     function into(dlId){
         $http({
             method : 'post',
@@ -250,6 +262,12 @@ myapp.controller("indexDetailedController",["$scope","$http","$sce","$location",
             clicked(url);
         }
         // 强制更新  $scope.apply();
+    }
+    // 语言事件-net
+    $scope.clickLanguageNet = function(id) {
+        $scope.langId = id;
+        // 改语言
+        $translate.use(id.toString());
     }
 
     // 类别事件,idnex当前下标，id:类别ID

@@ -11,6 +11,7 @@
     <link rel="stylesheet" th:href="@{/css/assets/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/reset.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/index3hk.css}">
     <script th:inline="javascript">
         var ctx = [[@{/}]];
     </script>
@@ -37,7 +38,7 @@
 
         @media (max-width: 768px) {
             #cc{
-               /* width:90%;*/
+                word-wrap:break-word;
                 height:100%;
             }
             #cc iframe {
@@ -50,11 +51,14 @@
             }
         }
         @media (min-width: 992px){
-            .col-md-8 {
-                width: 69.666667%;
-            }
             .col-md-offset-2 {
-                margin-left: 15.2%;
+                margin-left: 4%;
+            }
+            .col-md-8 {
+                width: 89.666667%;
+            }
+            .feedback .col-md-8 {
+                width: 70%;
             }
         }
 
@@ -78,50 +82,55 @@
     </script>
 </head>
 <body ng-app="myapp" ng-controller="indexDetailedController">
+<!-- 头部-->
+<div id="navbar">
+    <nav class="navbar-top" role="navigation">
+        <div class="container">
+            <div class="row">
+                <div class="navbar-top-left">
+                    <ul class="navbar-top-left-list navbar-top-list">
+                        <li class="navbar-logo-block"><span class="v-align-middle"></span><a href="https://www.three.com.hk/tc/home.html"><img class="navbar-logo" th:src="@{/img/brandThree.png}" alt="3" /></a></li>
+                        <li class="hidden-xs"><a href="javascript:void(0)" class="navbar-body-anchor" data-menu="buy"><span class="navbar-label">{{'lab101'|translate}}</span></a></li>
+                        <li class="hidden-xs"><a href="javascript:void(0)" class="navbar-body-anchor" data-menu="threeAndYou"><span class="navbar-label">{{'lab102'|translate}}</span></a></li>
+                        <li class="hidden-xs"><a href="javascript:void(0)" class="navbar-body-anchor is-active"><span class="navbar-label">{{'lab100'|translate}}</span></a></li>
+                    </ul>
+                </div>
+                <div class="navbar-top-right">
+                    <ul class="navbar-top-right-list navbar-top-list">
+                        <li class="subNavThreeSupreme-wrapper"><span class="v-align-middle"></span><a href="http://web.three.com.hk/3supreme/index.html" id="subNavThreeSupreme" class="btn-image"><img src="https://www.three.com.hk/media/global/logo-3supreme.png" class="navbar-icon hidden-md visible-xs" alt="3Supreme" style="width: auto; height: 25px; margin-top: -4px;" /></a></li>
+                        <li class="subNavLang-wrapper" style=" margin-left: 28px;"><span class="v-align-middle"></span>
+                            <element ng-if="langId == 1">
+                                <a href="javascript:void(0)" ng-click="clickLanguageNet(6)" class="btn-image">
+                                    <img src="https://www.three.com.hk/media/global/Language Icon_EN_2.svg" class="navbar-icon" alt="EN" />
+                                </a>
+                            </element>
+                            <element ng-if="langId == 6">
+                                <a href="javascript:void(0)" ng-click="clickLanguageNet(1)"class="btn-image">
+                                    <img src="https://www.three.com.hk/media/global/Language Icon_CN_2.svg" class="navbar-icon" alt="CN" />
+                                </a>
+                            </element>
+                        </li>
+                        <!-- <li class="subnavlogin-wrapper hidden-xs"><span class="v-align-middle"></span><a href="https://www.three.com.hk/3Care/chi/home.jsp?lang=chi&amp;appId=appCSNew" id="subNavLogin" class="btn-image"><img src="https://www.three.com.hk/media/global/Profile.svg" class="navbar-icon" alt="登入" /><span>登入</span></a></li>
+                        --> <li class="navbar-searchIcon" ng-click="clickLanguage()"><span class="v-align-middle"></span><button type="button" class="btn-image"><span class="v-align-middle"></span><img th:src="@{/img/search.png}" class="navbar-icon" alt="" /><span class="navbar-label">{{'lab106'|translate}}</span></button></li>
+                        <li class="navbar-searchIcon-xs" ng-click="clickLanguage()"><span class="v-align-middle"></span><button type="button" class="btn-image"><img th:src="@{/img/search-mobile.png}" class="navbar-icon" alt="Search" /></button></li>
+                        <li class="navbar-hamburger-xs"><span class="v-align-middle"></span><button type="button" class="btn-image navbar-menu"><img th:src="@{/img/hamburger.png}" class="navbar-icon" alt="Menu" /></button></li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </nav>
+</div>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-9 col-sm-offset-2 col-md-8 col-md-offset-2 main">
-            <div class="header">
-                <div class="header-loagin">
-                    <a href="javascript:void(0);" ng-click="clickCategory(0)"><img th:src="@{/img/faq_top3.png}"/></a>
-                </div>
-                <div class="header-lan">
-                    <img th:src="@{/img/globe1.png}"/>
-                    <select ng-model="langId" ng-change="clickLanguage()" ng-options=" language.id  as language.title for language in result.languages">
-                    </select>
-                </div>
-            </div>
-            <div class="nav-select">
-                <div class="input-group">
-                    <input style="height: 40px;" ng-model="searchTest" id="search" type="text" placeholder="{{selectTest}}" class="form-control" ng-keyup="onKeyup(event)">
-                    <span class="input-group-addon"><a href="javascript:;" ng-click="getSearch()"><span  class="glyphicon glyphicon-search"></span></a></span>
-                </div>
-            </div>
-            <div style="clear: both;margin-bottom: 12px;"></div>
-
-            <!-- 搜索-->
-            <div ng-show="searchShow">
-                <div class="content-box" style="padding: 0px 12px;">
-                    <ul>
-                        <li style="border:none;color: #555;" ng-if="detaileds.length == 0" >{{selectTestUnll}}</li>
-                        <li ng-repeat="detailed in detaileds"><a th:href="@{/appJson/getIndexDetailed?dlId={{detailed.id}}}">{{detailed.title}}</a></li>
-                    </ul>
-                </div>
-                <div class="content-box" style="padding: 0px 12px;margin-top: 50px;">
-                    <div class="list-group">
-                        <a href="javascript:;" class="list-group-item active" style="background-color: #71288E;border-color: #71288E;border-top-left-radius: 25px;">
-                            {{hotspotTest}}
-                        </a>
-                        <a ng-repeat="detailed in hotspots" class="list-group-item" th:href="@{/appJson/getIndexDetailed?dlId={{detailed.id}}}">{{detailed.title}}</a>
-                    </div>
-                </div>
-            </div>
-
+            <div class="content-type ng-binding" style="padding: 0px 12px;margin-top: 30px;color:#0f0f0f">{{detailed.title}}</div>
+            <hr style="width:98%;border:none; border-bottom:2px solid black;">
             <!-- 详情-->
-            <div style="margin-top: 30px;">
-                <div class="content-type">{{problem}}</div>
+            <div>
                 <div style="padding: 20px 12px;">
-                    <div class="content-type-test"><div class="content-type-test-div">{{detailed.title}}</div></div>
                     <div id="cc">
                         <div ng-bind-html="content" style="padding: 0px 8px;">
                         </div>
@@ -137,10 +146,11 @@
                 </div>
             </div>
 
-            <hr style="width:100%;border:none; border-bottom:2px solid #BA2E90;">
+
+            <hr style="width:97%;border:none; border-bottom:2px solid black;">
 
             <!-- feedback-->
-            <div class="row" style="margin-left: -3px;">
+            <div class="row feedback" style="margin-left: -3px;">
                 <div class="col-xs-4 col-sm-3 col-md-2">{{feedbackTest}}</div>
                 <div class="col-xs-12 col-sm-9 col-md-8">
                     <div class="col-xs-3 col-sm-3 col-md-2" style="padding-top: 20px;">
@@ -148,7 +158,7 @@
                             <span id="praise">
                                 <img th:src="@{/img/hui1.png}" id="praise-img" class="animation">
                             </span>
-                        <!--    <span id="praise-txt">{{dfcount}}</span>-->
+                            <!--    <span id="praise-txt">{{dfcount}}</span>-->
                             <span id="add-num" style="display: inline;"></span>
                         </div>
                         <div class="praise">
@@ -156,7 +166,7 @@
                             <span id="add-num1" style="display: inline;"></span>
                         </div>
                     </div>
-                    <div class="col-xs-9 col-sm-6 col-md-8" style="padding-top: 86px;">
+                    <div class="col-xs-9 col-sm-6 col-md-8" style="padding-top: 28px;">
                         <div id="praiseNayTest" ng-show="praiseNayTest > 0">
                             <div>
                                 <div style="font-weight: bold;">{{commonLabel6}}</div>
@@ -179,24 +189,35 @@
             </div>
 
             <!-- Smart Guide -->
-            <div class="row" ng-show="smartGuideType">
-                <div class="content-box" style="padding: 50px 27px;margin-top: -22px;">
-                    <div class="list-group">
-                        <a href="javascript:;" class="list-group-item active" style="background-color: #71288E;border-color: #71288E;border-top-left-radius: 25px;">
-                            {{commonLabel10}}
-                        </a>
-                        <a ng-repeat="detailed in smartGuide" class="list-group-item" th:href="@{/appJson/getIndexDetailed?dlId={{detailed.id}}}">{{detailed.title}}</a>
-                    </div>
+            <div class="hotspotsNav">
+                <div class="content-box" style="padding: 0px 12px;">
+                    <ul>
+                        <li ng-repeat="detailed in smartGuide"><a th:href="@{/appJson/getIndexDetailed?dlId={{detailed.id}}}">{{detailed.title}}</a></li>
+                    </ul>
                 </div>
             </div>
 
             <div style="height: 50px;"></div>
 
-
         </div>
     </div>
 
 </div>
+<div style="clear: both;margin-bottom: 12px;height: 200px;"></div>
+<!-- 尾部-->
+<footer class="footer">
+    <div class="container">
+        <nav class="row footer-directory-list">
+            <div class="col col-xs-6 col-md-2">
+                <h6>{{'lab103'|translate}}</h6>
+            </div>
+            <div class="col col-xs-6 col-md-2">
+                <h6>{{'lab104'|translate}}</h6>
+            </div>
+        </nav>
+    </div>
+</footer>
+
 <div class="scrollToTop" style="display: none;">
     <img th:src="@{/img/scroll-to-top.png}" alt="Back To Top">
 </div>

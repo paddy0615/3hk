@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="HK Express: 香港低成本航空公司！立即預訂機票，查詢航班時間表或航班狀態！">
-    <meta name="keywords" content="便宜機票,特價機票,廉價機票,優惠機票,HK Express">
+    <meta name="description" content="">
+    <meta name="keywords" content="问题,faq">
     <title>FAQS</title>
     <link rel="icon" type="image/x-icon" th:href="@{/img/favicon-32x32.png}"/>
     <link rel="stylesheet" th:href="@{/css/assets/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/reset.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/index3hk.css}">
     <script th:src="@{/js/assets/jquery.js}"></script>
     <script th:src="@{/js/layer/layer.js}"></script>
     <script th:src="@{/js/assets/angular.js}"></script>
@@ -34,11 +35,11 @@
             cursor: pointer;
         }
         @media (min-width: 992px){
-            .col-md-8 {
-                width: 69.666667%;
-            }
             .col-md-offset-2 {
-                margin-left: 15.2%;
+                margin-left: 4%;
+            }
+            .col-md-8 {
+                width: 89.666667%;
             }
         }
     </style>
@@ -60,47 +61,94 @@
     </script>
 </head>
 <body ng-app="myapp" ng-controller="indexController">
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-9 col-sm-offset-2 col-md-8 col-md-offset-2 main">
-
-            <div class="header">
-                <div class="header-loagin">
-                    <a href="javascript:void(0);" ng-click="clickCategory(0)"><img th:src="@{/img/faq_top3.png}"></a>
-                </div>
-                <div class="header-lan">
-                    <img th:src="@{/img/globe1.png}"/>
-                    <select ng-model="langId" ng-change="clickLanguage()" ng-options=" language.id  as language.title for language in result.languages">
-                    </select>
-                </div>
-            </div>
-
-            <div class="nav-select">
-                <div class="input-group">
-                    <input style="height: 40px;" ng-model="searchTest" id="search" type="text" placeholder="{{selectTest}}" class="form-control" ng-keyup="onKeyup(event)">
-                    <span class="input-group-addon"><a href="javascript:;" ng-click="getSearch()"><span class="glyphicon glyphicon-search"></span></a></span>
-                </div>
-            </div>
-            <div style="clear: both;margin-bottom: 12px;"></div>
-            <div ng-show="searchShow">
-                <div class="content-box" style="padding: 0px 12px;">
-                    <ul>
-                        <li style="border:none;color: #555;" ng-if="detaileds.length == 0" >{{selectTestUnll}}</li>
-                        <li ng-repeat="detailed in detaileds"><a th:href="@{/appJson/getIndexDetailed?dlId={{detailed.id}}}">{{detailed.title}}</a></li>
+<!-- 头部-->
+<div id="navbar">
+    <nav class="navbar-top" role="navigation">
+        <div class="container">
+            <div class="row">
+                <div class="navbar-top-left">
+                    <ul class="navbar-top-left-list navbar-top-list">
+                        <li class="navbar-logo-block"><span class="v-align-middle"></span><a href="https://www.three.com.hk/tc/home.html"><img class="navbar-logo" th:src="@{/img/brandThree.png}" alt="3" /></a></li>
+                        <li class="hidden-xs"><a href="javascript:void(0)" class="navbar-body-anchor" data-menu="buy"><span class="navbar-label">{{'lab101'|translate}}</span></a></li>
+                        <li class="hidden-xs"><a href="javascript:void(0)" class="navbar-body-anchor" data-menu="threeAndYou"><span class="navbar-label">{{'lab102'|translate}}</span></a></li>
+                        <li class="hidden-xs"><a href="javascript:void(0)" class="navbar-body-anchor is-active"><span class="navbar-label">{{'lab100'|translate}}</span></a></li>
                     </ul>
                 </div>
-            </div>
-            <div class="content-box" style="padding: 50px 12px;margin-top: -22px;">
-                <div class="list-group">
-                    <a href="javascript:;" class="list-group-item active" style="background-color: #71288E;border-color: #71288E;border-top-left-radius: 25px;">
-                        {{hotspotTest}}
-                    </a>
-                    <a ng-repeat="detailed in hotspots" class="list-group-item" th:href="@{/appJson/getIndexDetailed?dlId={{detailed.id}}}">{{detailed.title}}</a>
+                <div class="navbar-top-right">
+                    <ul class="navbar-top-right-list navbar-top-list">
+                        <li class="subNavThreeSupreme-wrapper"><span class="v-align-middle"></span><a href="http://web.three.com.hk/3supreme/index.html" id="subNavThreeSupreme" class="btn-image"><img src="https://www.three.com.hk/media/global/logo-3supreme.png" class="navbar-icon hidden-md visible-xs" alt="3Supreme" style="width: auto; height: 25px; margin-top: -4px;" /></a></li>
+                        <li class="subNavLang-wrapper" style=" margin-left: 248px;"><span class="v-align-middle"></span>
+                            <element ng-if="langId == 1">
+                                <a href="javascript:void(0)" ng-click="clickLanguageNet(6)" class="btn-image">
+                                    <img src="https://www.three.com.hk/media/global/Language Icon_EN_2.svg" class="navbar-icon" alt="EN" />
+                                </a>
+                            </element>
+                            <element ng-if="langId == 6">
+                                <a href="javascript:void(0)" ng-click="clickLanguageNet(1)"class="btn-image">
+                                    <img src="https://www.three.com.hk/media/global/Language Icon_CN_2.svg" class="navbar-icon" alt="CN" />
+                                </a>
+                            </element>
+                        </li>
+                        <!-- <li class="subnavlogin-wrapper hidden-xs"><span class="v-align-middle"></span><a href="https://www.three.com.hk/3Care/chi/home.jsp?lang=chi&amp;appId=appCSNew" id="subNavLogin" class="btn-image"><img src="https://www.three.com.hk/media/global/Profile.svg" class="navbar-icon" alt="登入" /><span>登入</span></a></li>
+                        --> <!--<li class="navbar-searchIcon" ng-click="clickLanguage()"><span class="v-align-middle"></span><button type="button" class="btn-image"><span class="v-align-middle"></span><img th:src="@{/img/search.png}" class="navbar-icon" alt="" /><span class="navbar-label">搜尋</span></button></li>
+                       --> <li class="navbar-searchIcon-xs" ng-click="clickLanguage()"><span class="v-align-middle"></span><button type="button" class="btn-image"><img th:src="@{/img/search-mobile.png}" class="navbar-icon" alt="Search" /></button></li>
+                        <li class="navbar-hamburger-xs"><span class="v-align-middle"></span><button type="button" class="btn-image navbar-menu"><img th:src="@{/img/hamburger.png}" class="navbar-icon" alt="Menu" /></button></li>
+                    </ul>
                 </div>
+
+
             </div>
+        </div>
+    </nav>
+</div>
+
+<!-- 中部-->
+<div class="col-sm-9 col-sm-offset-2 col-md-8 col-md-offset-2 main">
+    <div class="content-type ng-binding" style="padding: 0px 12px;margin-top: 30px;color:#0f0f0f">{{'lab100'|translate}}</div>
+    <div class="nav-select">
+        <div class="input-group">
+            <input style="height: 40px;" ng-model="searchTest" id="search" type="text" placeholder="{{'lab105'|translate}}" class="form-control" ng-keyup="onKeyup(event)">
+            <!--<span class="input-group-addon"><a href="javascript:;" ng-click="getSearch()"><span class="glyphicon glyphicon-search"></span></a></span>
+            --><span class="input-group-addon select-img" ng-click="getSearch()">
+                <button type="button" class="btn-image"><span class="v-align-middle"></span><img  th:src="@{/img/search.png}" class="navbar-icon" alt=""><span class="navbar-label">{{'lab106'|translate}}</span></button>
+            </span>
+        </div>
+    </div>
+    <div style="clear: both;margin-bottom: 12px;"></div>
+    <div ng-show="searchShow" class="searchShow">
+        <div class="content-box" style="padding: 0px 12px;">
+            <ul>
+                <li style="border:none;color: #555;" ng-if="detaileds.length == 0" >{{selectTestUnll}}</li>
+                <li ng-repeat="detailed in detaileds"><a th:href="@{/appJson/getIndexDetailed?dlId={{detailed.id}}}">{{detailed.title}}</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 热点-->
+    <div class="hotspotsNav" style="margin-top: 10%;">
+        <div class="content-box" style="padding: 0px 12px;">
+            <ul>
+                <li ng-repeat="detailed in hotspots"><a th:href="@{/appJson/getIndexDetailed?dlId={{detailed.id}}}">{{detailed.title}}</a></li>
+            </ul>
         </div>
     </div>
 </div>
+
+<div style="clear: both;margin-bottom: 12px;height: 200px;"></div>
+
+<!-- 尾部-->
+<footer class="footer">
+    <div class="container">
+        <nav class="row footer-directory-list">
+            <div class="col col-xs-6 col-md-2">
+                <h6>{{'lab103'|translate}}</h6>
+            </div>
+            <div class="col col-xs-6 col-md-2">
+                <h6>{{'lab104'|translate}}</h6>
+            </div>
+        </nav>
+    </div>
+</footer>
+
 <div class="scrollToTop" style="display: none;">
     <img th:src="@{/img/scroll-to-top.png}" alt="Back To Top">
 </div>

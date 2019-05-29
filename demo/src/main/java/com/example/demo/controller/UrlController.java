@@ -16,16 +16,16 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("appPage")
 public class UrlController {
     @RequestMapping("/")
-    public String index(){return "faqs/index3hk";}
+    public String index(){return "faqs/index";}
 
     @RequestMapping("/index")
-    public String index1(){return "faqs/index3hk";}
-
-    @RequestMapping("/search")
-    public String search(){return "faqs/search";}
+    public String index1(){return "faqs/index";}
 
     @RequestMapping("/indexDetailed")
     public String indexDetailed(){return "faqs/indexDetailed";}
+
+    @RequestMapping("/search")
+    public String search(){return "faqs/search";}
 
     @RequestMapping("/admin/login")
     public String login(){return "faqs/admin/login";}
